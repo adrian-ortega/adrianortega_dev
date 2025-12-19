@@ -1,0 +1,18 @@
+import { Router } from "express";
+import { healthRouter } from "./health";
+import { pagesRouter } from "./pages";
+import { syncRouter } from "./sync";
+import { postsRouter } from "./posts";
+import { widgetsRouter } from "./widgets";
+import { sidebarsRouter } from "./sidebars";
+import { notificationsRouter } from "./notifications";
+
+export const apiRouter = Router();
+
+apiRouter.use('/health', healthRouter);
+apiRouter.use('/posts', postsRouter);
+apiRouter.use('/pages', pagesRouter);
+apiRouter.use('/sidebars', sidebarsRouter);
+apiRouter.use('/notifications', notificationsRouter);
+apiRouter.use('/widgets', widgetsRouter);
+apiRouter.use('/sync', syncRouter);
