@@ -1,4 +1,4 @@
-import { ENTITY_TYPE, SidebarEntity } from "../types";
+import { SidebarEntity, ENTITY_TYPE } from "../../../shared/types";
 import { getEntityBySlug } from "./mdService";
 
 export async function readSidebarFile(slug: string): Promise<SidebarEntity> {

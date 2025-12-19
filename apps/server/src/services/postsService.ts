@@ -1,4 +1,4 @@
-import { ENTITY_TYPE, MdEntity, PostEntity } from "../types";
+import { PostEntity, MdEntity, ENTITY_TYPE } from "../../../shared/types";
 import { objectHasProp } from "../utils/helpers";
 import { getEntities, getEntityBySlug, getFiles } from "./mdService";
 

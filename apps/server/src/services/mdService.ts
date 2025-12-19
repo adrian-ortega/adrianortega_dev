@@ -6,7 +6,7 @@ import { getContentDir } from "../utils/paths";
 import { parseMarkdown } from "../utils/md";
 import { slugify } from "../../../shared";
 import { getFromCache, setInCache } from "./mdCacheService";
-import { ENTITY_TYPE, MdEntity } from "../types";
+import { ENTITY_TYPE, MdEntity } from "../../../shared/types";
 
 enum DIR_MAP {
   POST = "posts",

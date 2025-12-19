@@ -4,8 +4,8 @@ import { listPostsByCategory, readPostFile } from "../services/postsService";
 export async function listPosts(_req: Request, res: Response, next: NextFunction) {
   try {
     const tag = String(_req.query.tag || "").trim() || undefined;
-    const slugs = await listPostsByCategory(tag);
-    return res.json({ slugs });
+    const posts = await listPostsByCategory(tag);
+    return res.json({ posts });
   } catch (e) {
     return next(e);
   }

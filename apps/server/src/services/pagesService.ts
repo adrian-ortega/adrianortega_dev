@@ -1,7 +1,6 @@
-import { ENTITY_TYPE } from './../types';
-import { PageEntity } from "../types";
 import { getEntityBySlug, getFiles } from "./mdService";
 import { slugify } from '../../../shared';
+import { ENTITY_TYPE, PageEntity } from "../../../shared/types";
 
 export async function listPageSlugs(): Promise<string[]> {
   const files = getFiles(ENTITY_TYPE.PAGE);

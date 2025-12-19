@@ -1,4 +1,4 @@
-import { ENTITY_TYPE, WidgetEntity } from "../types";
+import { WidgetEntity, ENTITY_TYPE } from "../../../shared/types";
 import { getEntityBySlug } from "./mdService";
 
 export async function readWidgetFile(slug: string): Promise<WidgetEntity> {

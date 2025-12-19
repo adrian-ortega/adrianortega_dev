@@ -1,4 +1,4 @@
-import { ENTITY_TYPE, NotificationEntity } from "../types";
+import { ENTITY_TYPE, NotificationEntity } from "../../../shared/types";
 import { getEntityBySlug } from "./mdService";
 
 export async function readNotificationFile(slug: string): Promise<NotificationEntity> {
