@@ -1,4 +1,4 @@
-
+# Packages
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -8,6 +8,7 @@
 node_modules
 .pnp.*
 
+# VS Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
