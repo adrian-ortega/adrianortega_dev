@@ -11,6 +11,7 @@ variables:
 # Tests / Build checks
 # -----------------------
 server:test:
+  stage: test
   image: node:22-slim
   before_script:
     - corepack enable
