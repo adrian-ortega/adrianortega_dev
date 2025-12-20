@@ -1,15 +1,18 @@
-import Pages from "./components/Pages/Pages";
-import Posts from "./components/Posts";
-import Tags from "./components/Tags/Tags";
+import { RouterProvider } from "react-router/dom";
+import { Stack } from "./components/Core/Stack";
+import { createRouter } from "./routes";
+import AppHeader from "./components/App/AppHeader";
+import AppFooter from "./components/App/AppFooter";
 
 function App() {
+  const router = createRouter();
   return (
-    <>
-      <Pages />
-      <Posts />
-      <Tags />
-    </>
-  )
+    <Stack className="App-root" gap={0}>
+      <AppHeader/>
+      <RouterProvider router={router} />
+      <AppFooter/>
+    </Stack>
+  );
 }
 
 export default App

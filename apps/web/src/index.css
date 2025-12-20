@@ -1,3 +1,18 @@
-/*
-@TODO
-*/
+.Container-root {
+  margin: 0 auto;
+}
+
+.Flex-root {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.Group-root {
+  display: flex;
+  flex-direction: row;
+}
+
+.Stack-root {
+  display: flex;
+  flex-direction: column;
+}
