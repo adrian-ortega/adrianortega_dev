@@ -13,6 +13,7 @@ COPY apps/web/package.json apps/web/yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 FROM web-deps AS web-build
+COPY apps/shared /app/apps/shared
 COPY apps/web ./
 RUN yarn build
 

@@ -12,7 +12,7 @@ type PostPreviewProps = {
 
 export function PostPreview({ post }: PostPreviewProps) {
   const descriptionParagraphs = useMemo(() => {
-    return post.description.split("\n").filter((p) => p.trim() !== "");
+    return post.description.split("\n").filter((p: string) => p.trim() !== "");
   }, [post.description]);
   return (
     <Box className="PostPreview-root">
@@ -22,7 +22,7 @@ export function PostPreview({ post }: PostPreviewProps) {
       <p className="PostPreview-published">{format(post.created_at as string, "PP pp")}</p>
       <PostTags className="PostPreview-tags" post={post} />
       <Box className="PostPreview-description">
-        {descriptionParagraphs.map((paragraph, index) => (
+        {descriptionParagraphs.map((paragraph: string, index: number) => (
           <p key={index}>{paragraph}</p>
         ))}
       </Box>
