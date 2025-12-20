@@ -1,15 +1,17 @@
 import type { PostEntity } from "../../../../shared/types";
-import { Group } from "../Core/Group";
+import { to } from "../../routes/paths";
+import { classNames } from "../../utils/components/attributes";
+import { Group, type GroupProps } from "../Core/Group";
 
-type PostTagsProps = {
+type PostTagsProps = GroupProps & {
   post: PostEntity;
 }
 
-export function PostTags({ post }: PostTagsProps) {
+export function PostTags({ post, className }: PostTagsProps) {
   return (
-    <Group className="PostTags-root" gap={8} style={{ marginBottom: 8 }}>
+    <Group className={classNames(["PostTags-root", className])} gap={8} style={{ marginBottom: 8 }}>
       {post.tags.map((tagSlug) => (
-        <a key={tagSlug} href={`/tags/${tagSlug}`}>
+        <a key={tagSlug} href={to.postsTag(tagSlug)} className="PostTags-tag">
           {tagSlug}
         </a>
       ))}

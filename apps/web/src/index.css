@@ -1,4 +1,23 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #101010;
+  background-color: #fefefe;
+}
+
 .Container-root {
+  width: 100%;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -15,4 +34,59 @@
 .Stack-root {
   display: flex;
   flex-direction: column;
+}
+
+.Header-root {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  height: 60px;
+}
+
+.Header-nav {
+  display: flex;
+  gap: 0.5rem;
+
+  & a {
+    text-decoration: none;
+    color: #101010;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.Posts-root {
+  padding: 2rem 0;
+}
+
+.PostTags-root {
+  & a {
+    text-decoration: none;
+    color: #0070f3;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+  }
+}
+
+.PostPreview-root {
+  & .PostPreview-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+
+    & a {
+      text-decoration: none;
+      color: #101010;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  & .PostPreview-published {
+    font-size: 0.875rem;
+    color: #666666;
+    margin-bottom: 0.25rem;
+  }
 }

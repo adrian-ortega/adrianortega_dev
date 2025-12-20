@@ -1,23 +1,35 @@
+import { useEffect } from "react";
 import { usePosts } from "../../utils/usePosts";
+import { Box } from "../Core/Box";
+import { Container } from "../Core/Container";
+import { Stack } from "../Core/Stack";
+import { PostPreview } from "./PostPreview";
 
-const Posts = () => {
-  const [posts, { loading }] = usePosts();
+type PostsProps = {
+  tag?: string;
+}
 
+const Posts = ({ tag }: PostsProps) => {
+  const [posts, { loading, refetch }] = usePosts();
+
+  useEffect(() => {
+    refetch(tag as string);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tag])
   return (
-    <div>
-      <h2>Posts Component</h2>
-      {loading ? (
-        <p>Loading posts...</p>
-      ) : posts.length > 0 ? (
-        <ul>
-          {posts.map((post, index) => (
-            <li key={index}>{post.title}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No posts available.</p>
-      )}
-    </div>
+    <Box className="Posts-root">
+      <Container>
+        {loading ? (
+          <Box>Loading...</Box>
+        ) : (
+          <Stack gap={32}>
+            {posts.map((post) => (
+              <PostPreview key={`post-${post.slug}`} post={post} />
+            ))}
+          </Stack>
+        )}
+      </Container>
+    </Box>
   );
 };
 

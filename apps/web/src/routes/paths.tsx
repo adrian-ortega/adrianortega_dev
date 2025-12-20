@@ -1,6 +1,6 @@
-import type { To } from "react-router";
+import { generatePath, type To } from "react-router";
 
-type RouteId = "home" | "page" | "about" | "blog" | "blogTag" | "contact";
+type RouteId = "home" | "page" | "about" | "posts" | "postsTag" | "post" | "contact";
 
 export type RouteMetaPage = {
   title?: string;
@@ -24,8 +24,9 @@ export type RouteNode = {
 export const paths: Record<RouteId, string> = {
   home: "/",
   about: "/about",
-  blog: "/blog",
-  blogTag: "/tags/:slug",
+  posts: "/posts",
+  post: "/posts/:slug",
+  postsTag: "/posts/by-tag/:tag",
   page: "/page/:slug",
   contact: "/contact",
 };
@@ -46,9 +47,9 @@ export const routes: RouteNode[] = [
     title: "About",
   },
   {
-    id: "blog",
-    path: paths.blog,
-    title: "Blog",
+    id: "posts",
+    path: paths.posts,
+    title: "Posts",
   },
   {
     id: "contact",
@@ -56,3 +57,13 @@ export const routes: RouteNode[] = [
     title: "Contact",
   }
 ];
+
+export const to = {
+  home: () => paths.home,
+  about: () => paths.about,
+  posts: () => paths.posts,
+  postsTag: (tag: string) => generatePath(paths.postsTag, { tag }),
+  post: (slug: string) => generatePath(paths.post, { slug }),
+  page: (slug: string) => generatePath(paths.page, { slug }),
+  contact: () => paths.contact,
+}
