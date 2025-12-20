@@ -18,7 +18,7 @@ export type MdEntity = Record<string, any> & {
   content: string
 };
 
-type HasHTMLMetaData = {
+type HasHTMLMetaData = Record<string, any> & {
   page_title?: string;
   page_description?: string;
 }

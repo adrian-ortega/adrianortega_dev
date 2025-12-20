@@ -1,38 +1,21 @@
-import { useEffect, useState } from "react";
-import { type PostEntity } from "../../../../shared/types";
+import { usePosts } from "../../utils/usePosts";
 
 const Posts = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [posts, setPosts] = useState<PostEntity[]>([]);
-
-  const fetchPosts = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/posts');
-      const data: { posts:PostEntity[]} = await response.json();
-      setPosts(data.posts);
-    } catch (error) {
-      console.error("Failed to fetch posts:", error);
-    } finally {      
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const [posts, { loading }] = usePosts();
 
   return (
     <div>
       <h2>Posts Component</h2>
       {loading ? (
         <p>Loading posts...</p>
-      ) : (
+      ) : posts.length > 0 ? (
         <ul>
           {posts.map((post, index) => (
             <li key={index}>{post.title}</li>
           ))}
         </ul>
+      ) : (
+        <p>No posts available.</p>
       )}
     </div>
   );
