@@ -5,6 +5,8 @@ import { PostTags } from "./PostTags";
 import { Link } from "react-router";
 import { to } from "../../routes/paths";
 import { format } from "date-fns";
+import { Group } from "../Core/Group";
+import { IconCircleFilled } from "@tabler/icons-react";
 
 type PostPreviewProps = {
   post: PostEntity;
@@ -19,8 +21,13 @@ export function PostPreview({ post }: PostPreviewProps) {
       <h2 className="PostPreview-title">
         <Link to={to.post(post.slug)}>{post.title}</Link>
       </h2>
-      <p className="PostPreview-published">{format(post.created_at as string, "PP pp")}</p>
-      <PostTags className="PostPreview-tags" post={post} />
+      <Group alignItems="center">
+        <Box className="PostPreview-published">
+          {format(post.created_at as string, "PP pp")}
+        </Box>
+        <IconCircleFilled size={4} color="var(--app-colors-primary-7)" />
+        <PostTags className="PostPreview-tags" post={post} />
+      </Group>
       <Box className="PostPreview-description">
         {descriptionParagraphs.map((paragraph: string, index: number) => (
           <p key={index}>{paragraph}</p>

@@ -2,27 +2,44 @@
   --font-family-body: Verdana, Geneva, Tahoma, sans-serif;
   --font-family-headings: Georgia, 'Times New Roman', Times, serif;
 
+  --font-weight-semibold: 600;
   --font-weight-headings-semibold: 600;
 
-  --font-size-h2: 32px;
-  --font-size-h3: 24px;
-  --font-size-h4: 20px;
-  --font-size-h5: 16px;
-  --font-size-h6: 14px;
+  --font-size-h2: 2em;
+  --font-size-h3: 1.5em;
+  --font-size-h4: 1.25em;
+  --font-size-h5: 1em;
+  --font-size-h6: 0.875em;
+  
+  --app-colors-white: #ffffff;
+  --app-colors-black: #000000;
 
-  --app-bg-color: #ffffff;
-  --app-fg-color: #101010;
+  --app-colors-primary-0: #f7f3f2;
+  --app-colors-primary-1: #e8e6e5;
+  --app-colors-primary-2: #d2c9c6;
+  --app-colors-primary-3: #bdaaa4;
+  --app-colors-primary-4: #ab9087;
+  --app-colors-primary-5: #a17f74;
+  --app-colors-primary-6: #9d766a;
+  --app-colors-primary-7: #896459;
+  --app-colors-primary-8: #7b594e;
+  --app-colors-primary-9: #5d4037;
 
-  --app-colors-gray-0: #f9f9f9;
-  --app-colors-gray-1: #e0e0e0;
-  --app-colors-gray-2: #c0c0c0;
-  --app-colors-gray-3: #808080;
-  --app-colors-gray-4: #404040;
-  --app-colors-gray-5: #202020;
-  --app-colors-gray-6: #101010;
-  --app-colors-gray-7: #080808;
-  --app-colors-gray-8: #080808;
-  --app-colors-gray-9: #080808;
+  --app-colors-gray-0: #f5f6f4;
+  --app-colors-gray-1: #e9e9e9;
+  --app-colors-gray-2: #d0d2cf;
+  --app-colors-gray-3: #b6b9b1;
+  --app-colors-gray-4: #a0a498;
+  --app-colors-gray-5: #919787;
+  --app-colors-gray-6: #777d6b;
+  --app-colors-gray-7: #696f5e;
+  --app-colors-gray-8: #34382d;
+  --app-colors-gray-9: #2A2D24;
+
+  --app-color-primary: var(--app-colors-primary-7);
+  --app-anchor-color: var(--app-colors-primary-9);
+  --app-bg-color: var(--app-colors-gray-0);
+  --app-fg-color: var(--app-colors-gray-9);
 }
 
 :root .dark-mode {
@@ -48,10 +65,24 @@ body {
   background-color: var(--app-bg-color);
 }
 
+a {
+  color: var(--app-anchor-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .Container-root {
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 98%;
+    padding: 0 1rem;
+  }
 }
 
 .Flex-root {
@@ -72,40 +103,47 @@ body {
 .Header-root {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5em;
   height: 60px;
 }
 
 .Header-nav {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.5em;
 
   & a {
-    text-decoration: none;
-    color: #101010;
-    font-size: 1rem;
-    font-weight: 700;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.875rem;
   }
 }
 
 .Posts-root {
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .PostTags-root {
   & a {
     text-decoration: none;
-    color: #0070f3;
-    font-size: 0.875rem;
-    margin-right: 0.5rem;
+    font-size: 0.75rem;
+    background: var(--app-colors-white);
+    padding: 0.0125em 0.65em;
+    border-radius: 300em;
+    border: 1px solid var(--app-colors-gray-1);
+
+    &:hover {
+      background: var(--app-colors-primary-9);
+      color: var(--app-colors-white);
+      border-color: var(--app-colors-primary-9);
+    }
   }
 }
 
 .PostPreview-root {
   & .PostPreview-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0;
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-headings-semibold);
+    font-family: var(--font-family-headings);
+    margin: 0 0 0.5em 0;
 
     & a {
       text-decoration: none;
@@ -119,8 +157,15 @@ body {
 
   & .PostPreview-published {
     font-size: 0.875rem;
-    color: #666666;
-    margin-bottom: 0.25rem;
+    color: var(--app-colors-gray-6);
+  }
+
+  & .PostPreview-description {
+    margin-top: 1em;
+
+    &, & p {
+      color: var(--app-colors-gray-7);
+    }
   }
 }
 
@@ -151,7 +196,14 @@ body {
   }
 }
 
+.NotFound-root,
 .Post-root {
+  padding: 3em 0;
+}
+
+.Post-root,
+.Content-root {
+
   & h1,
   & h2,
   & h3,
@@ -213,6 +265,23 @@ body {
     color: var(--app-colors-gray-4);
   }
 
+  & a {
+    text-decoration: none;
+    border-bottom: 1px dashed var(--app-colors-gray-3);
+
+    &:hover {
+      border-bottom-style: solid;
+      border-bottom-color: var(--app-anchor-color)
+    }
+  }
+
+  :not(pre) > code {
+    font-size: 0.95em;
+    background: var(--app-colors-gray-1);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+  }
+
   & ul,
   & ol,
   & p {
@@ -234,18 +303,7 @@ body {
     list-style-type: disc;
   }
 
-  & pre {
-    background: #404040;
-    color: #fff;
-    padding: 0.5em;
-    width: 100%;
-    max-width: 100%;
-    margin: 1em 0 2em;
-    overflow: auto;
-  }
-
-  & *:first-child {
+  & > *:first-child {
     margin-top: 0;
   }
-
 }

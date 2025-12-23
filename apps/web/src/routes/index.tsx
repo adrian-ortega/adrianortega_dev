@@ -1,10 +1,11 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { paths } from "./paths";
 import { RouteError } from "../components/Errors/RouteError";
 import { HomePage } from "../components/Pages/HomePage";
 import { Post } from "../components/Posts/Post";
 import Posts from "../components/Posts";
 import { PostsPage } from "../components/Pages/PostsPage";
+import { NotFound } from "../components/NotFound/NotFound";
 
 export const createRouter = () =>
   createBrowserRouter([
@@ -39,5 +40,12 @@ export const createRouter = () =>
           element: <Post/>,
         },
       ],
+    }, {
+      path: paths.notFound,
+      element: <NotFound />,
+      errorElement: <RouteError />,
+    }, {
+      path: "*",
+      element: <Navigate to={paths.notFound} replace />,
     }
   ]);

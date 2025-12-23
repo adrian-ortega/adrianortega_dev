@@ -1,6 +1,6 @@
 import { generatePath, type To } from "react-router";
 
-type RouteId = "home" | "page" | "about" | "posts" | "postsTag" | "post" | "contact";
+type RouteId = "home" | "page" | "about" | "posts" | "postsTag" | "post" | "contact" | "notFound";
 
 export type RouteMetaPage = {
   title?: string;
@@ -29,6 +29,7 @@ export const paths: Record<RouteId, string> = {
   postsTag: "/posts/by-tag/:tag",
   page: "/page/:slug",
   contact: "/contact",
+  notFound: "/page-not-found",
 };
 
 export const routes: RouteNode[] = [
@@ -55,6 +56,11 @@ export const routes: RouteNode[] = [
     id: "contact",
     path: paths.contact,
     title: "Contact",
+  }, {
+    id: "notFound",
+    path: paths.notFound,
+    title: "Not Found",
+    hidden: true,
   }
 ];
 
@@ -66,4 +72,5 @@ export const to = {
   post: (slug: string) => generatePath(paths.post, { slug }),
   page: (slug: string) => generatePath(paths.page, { slug }),
   contact: () => paths.contact,
+  notFound: () => paths.notFound,
 }

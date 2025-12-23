@@ -5,7 +5,12 @@ export async function listPosts(_req: Request, res: Response, next: NextFunction
   try {
     const tag = String(_req.query.tag || "").trim() || undefined;
     const posts = await listPostsByCategory(tag);
-    return res.json({ posts });
+    let error: string | undefined = undefined;
+    if (tag && posts?.length === 0) {
+      error = `No posts found with tag "${tag}"`;
+    }
+
+    return res.json({ posts, error });
   } catch (e) {
     return next(e);
   }
@@ -22,6 +27,10 @@ export async function getPostBySlug(req: Request, res: Response, next: NextFunct
     const post = await readPostFile(slug);
     return res.json(post);
   } catch (e) {
+    if ((e as Error).message === "Post not found") {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
     return next(e);
   }
 }

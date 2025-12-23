@@ -9,7 +9,7 @@ type PostTagsProps = GroupProps & {
 
 export function PostTags({ post, className }: PostTagsProps) {
   return (
-    <Group className={classNames(["PostTags-root", className])} gap={8} style={{ marginBottom: 8 }}>
+    <Group className={classNames(["PostTags-root", className])} gap={8}>
       {post.tags.map((tagSlug: string) => (
         <a key={tagSlug} href={to.postsTag(tagSlug)} className="PostTags-tag">
           {tagSlug}
