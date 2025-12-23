@@ -1,8 +1,28 @@
 :root {
+  --font-family-body: Verdana, Geneva, Tahoma, sans-serif;
+  --font-family-headings: Georgia, 'Times New Roman', Times, serif;
+
+  --font-weight-headings-semibold: 600;
+
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-h5: 16px;
+  --font-size-h6: 14px;
+
   --app-bg-color: #ffffff;
   --app-fg-color: #101010;
 
   --app-colors-gray-0: #f9f9f9;
+  --app-colors-gray-1: #e0e0e0;
+  --app-colors-gray-2: #c0c0c0;
+  --app-colors-gray-3: #808080;
+  --app-colors-gray-4: #404040;
+  --app-colors-gray-5: #202020;
+  --app-colors-gray-6: #101010;
+  --app-colors-gray-7: #080808;
+  --app-colors-gray-8: #080808;
+  --app-colors-gray-9: #080808;
 }
 
 :root .dark-mode {
@@ -14,7 +34,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: var(--font-family-body);
 }
 
 html {
@@ -129,4 +149,103 @@ body {
     width: 1.25em;
     height: 1.25em;
   }
+}
+
+.Post-root {
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    font-family: var(--font-family-headings);
+  }
+
+  & h1,
+  & h2 {
+    font-size: var(--font-size-h2);
+    margin-top: 0.8em;
+    margin-bottom: 1.25em;
+
+    &.subheader {
+      font-size: 1.5em;
+    }
+  }
+
+  & h3 {
+    font-size: var(--font-size-h3);
+    margin: 1.25em 0;
+
+    &.subheader {
+      font-size: 20px;
+    }
+  }
+
+  & h4 {
+    font-size: var(--font-size-h4);
+    margin: 1.25em 0 0.8em;
+
+    &.subheader {
+      font-size: 1.2em;
+    }
+  }
+
+  & h5 {
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-headings-semibold);
+    margin: 0.8em 0 0.4em;
+
+    &.subheader {
+      font-size: 0.875em;
+    }
+  }
+
+  & h6 {
+    font-size: var(--font-size-h6);
+    text-transform: uppercase;
+    margin: 1em 0 0.4em;
+
+    &.subheader {
+      font-size: 0.75em;
+    }
+  }
+
+  & .subheader {
+    font-family: var(--font-family-body);
+    color: var(--app-colors-gray-4);
+  }
+
+  & ul,
+  & ol,
+  & p {
+    line-height: 1.5;
+    margin: 1.5em 0 1em;
+    font-size: 1em;
+  }
+
+  & ul,
+  & ol {
+    padding-left: 2em;
+
+    li {
+      padding-bottom: 0.5em;
+    }
+  }
+
+  & ul {
+    list-style-type: disc;
+  }
+
+  & pre {
+    background: #404040;
+    color: #fff;
+    padding: 0.5em;
+    width: 100%;
+    max-width: 100%;
+    margin: 1em 0 2em;
+    overflow: auto;
+  }
+
+  & *:first-child {
+    margin-top: 0;
+  }
+
 }

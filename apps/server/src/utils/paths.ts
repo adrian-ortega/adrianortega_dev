@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+const projectRoot = process.cwd();
+
 export const ensureDirectoryExists = (dirPath: string) => {
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
@@ -8,12 +10,12 @@ export const ensureDirectoryExists = (dirPath: string) => {
 }
 
 const ensureAndReturnDir = (relativePath: string) => {
-  const dir = path.resolve(process.cwd(), relativePath);
+  const dir = path.resolve(projectRoot, relativePath);
   ensureDirectoryExists(dir);
   return dir;
 }
 
-export const getPublicDir = () => process.env.APP_PUBLIC_DIR ?? ensureAndReturnDir("./public");
+export const getPublicDir = () => process.env.APP_PUBLIC_DIR ?? path.resolve(projectRoot, "../web/dist");
 
 export const getDataDir = () => process.env.APP_DATA_DIR ?? ensureAndReturnDir("./data");
 

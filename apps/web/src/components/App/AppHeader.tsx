@@ -15,12 +15,13 @@ const AppHeader = () => {
               <span>Ortega</span>
             </a>
           </Box>
-          <nav className="Header-nav">
-            <a href={to.home()}>Home</a>
-            <a href={to.about()}>About</a>
-            <a href={to.posts()}>Posts</a>
-          </nav>
-          <ColorSchemeSwitcher />
+          <Group alignItems="center">
+            <Group component="nav" className="Header-nav">
+              <a href={to.about()}>About</a>
+              <a href={to.posts()}>Posts</a>
+            </Group>
+            <ColorSchemeSwitcher />
+          </Group>
         </Group>
       </Container>
     </Box>

@@ -24,6 +24,7 @@ export function usePosts(): UsePostsReturnType {
 
   const refetch = async (tag?: string) => {
     setLoading(true);
+    setData([]);
     try {
       const response = await fetch(tag ? `/api/posts?tag=${tag}` : "/api/posts");
       const data: PostsResponse = await response.json();

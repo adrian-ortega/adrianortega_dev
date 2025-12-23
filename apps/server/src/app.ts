@@ -7,6 +7,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { apiRouter } from "./routes/api";
 import { notFound } from "./middleware/notFound";
 import { errorHandler } from "./middleware/errorHandler";
+import { getPublicDir } from "./utils/paths";
 
 const APP_ORIGIN = process.env.APP_ORIGIN ?? "http://localhost:5173";
 
@@ -44,19 +45,17 @@ export function createApp() {
   // In dev (tsx/ts-node) and prod (compiled JS in dist), we start the
   // server from the project root (/app in Docker, repo root locally).
   // The built web app always lives at apps/web/dist relative to that root.
-  const projectRoot = process.cwd();
-  const clientDistPath = path.resolve(projectRoot, "apps/web/dist");
-
-  app.use(express.static(clientDistPath));
-
+  const clientDistPath = getPublicDir();
+  
   // SPA fallback: for any non-API route, send index.html
-  app.get(/^\/(?!api|media).*/, (req, res, next) => {
-    if (req.path.startsWith("/api") || req.path.startsWith("/media")) {
+  app.get(/^\/(?!api|assets).*/, (req, res, next) => {
+    if (req.path.startsWith("/api") || req.path.startsWith("/assets")) {
       return next();
     }
     return res.sendFile(path.join(clientDistPath, "index.html"));
   });
-
+  
+  app.use(express.static(clientDistPath));
   // ---------------------------
   // 404 + error handling
   // ---------------------------

@@ -32,8 +32,16 @@ export async function listPostsByCategory(tag?: string): Promise<PostEntity[] | 
   const posts = await getEntities<PostEntity>(ENTITY_TYPE.POST, [postTransformer]);
   if (!posts) return null;
 
-  return tag ? posts?.filter((post) => post.tags.includes(tag) && !post.draft)
+  const filteredPosts = tag ? posts?.filter((post) => post.tags.includes(tag) && !post.draft)
     : posts.filter((post) => !post.draft);
+  
+  filteredPosts.sort((a: PostEntity, b: PostEntity) => {
+    const dateA = new Date(a.created_at ?? 0).getTime();
+    const dateB = new Date(b.created_at ?? 0).getTime();
+    return dateB - dateA;
+  });
+  
+  return filteredPosts;
 }
 
 export async function readPostFile(slug: string): Promise<PostEntity | null> {
