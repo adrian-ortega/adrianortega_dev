@@ -23,7 +23,6 @@ export function Flex<C extends React.ElementType = "div">({
   ...boxProps
 }: FlexProps<C>) {
   const _style: React.CSSProperties = {
-    display: "flex",
     gap,
     alignItems,
     justifyContent,

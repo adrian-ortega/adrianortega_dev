@@ -27,7 +27,7 @@ const Posts = ({ tag }: PostsProps) => {
         {loading ? (
           <Box>Loading...</Box>
         ) : (
-          <Stack gap={64}>
+          <Stack className="PostPreviews-root" gap={64}>
             {posts.map((post) => (
               <PostPreview key={`post-${post.slug}`} post={post} />
             ))}

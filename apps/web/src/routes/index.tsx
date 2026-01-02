@@ -1,11 +1,13 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import { paths } from "./paths";
+
 import { RouteError } from "../components/Errors/RouteError";
+import { AboutPage } from "../components/Pages/AboutPage";
 import { HomePage } from "../components/Pages/HomePage";
-import { Post } from "../components/Posts/Post";
-import Posts from "../components/Posts";
 import { PostsPage } from "../components/Pages/PostsPage";
 import { NotFound } from "../components/NotFound/NotFound";
+import Posts from "../components/Posts";
+import { Post } from "../components/Posts/Post";
+import { paths } from "./paths";
 
 export const createRouter = () =>
   createBrowserRouter([
@@ -16,7 +18,7 @@ export const createRouter = () =>
     },
     {
       path: paths.about,
-      element: <div>About Page</div>,
+      element: <AboutPage />,
       errorElement: <RouteError />,
     },
     {

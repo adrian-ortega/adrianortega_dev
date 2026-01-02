@@ -25,7 +25,7 @@ export function PostPreview({ post }: PostPreviewProps) {
         <Box className="PostPreview-published">
           {format(post.created_at as string, "PP pp")}
         </Box>
-        <IconCircleFilled size={4} color="var(--app-colors-primary-7)" />
+        <IconCircleFilled size={4} color="var(--colors-primary-7)" />
         <PostTags className="PostPreview-tags" post={post} />
       </Group>
       <Box className="PostPreview-description">
