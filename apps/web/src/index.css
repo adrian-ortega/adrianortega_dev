@@ -57,8 +57,7 @@
   --anchor-color: var(--colors-primary-9);
   --bg-color: var(--colors-gray-0);
   --fg-color: var(--colors-gray-9);
-
-  // Components
+  
   --container-max-width-desktop: 1100px;
   --container-max-width-widescreen: 1200px;
 }

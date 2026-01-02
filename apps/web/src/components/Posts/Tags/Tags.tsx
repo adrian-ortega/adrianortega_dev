@@ -1,4 +1,4 @@
-import { useTags } from "../../utils/useTags";
+import { useTags } from "../../../utils/useTags";
 
 const Tags = () => {
   const [tags, { loading, fetchBySlug }] = useTags();
