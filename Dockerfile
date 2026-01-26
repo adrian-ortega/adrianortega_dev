@@ -13,6 +13,7 @@ COPY apps/web/package.json apps/web/yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 FROM web-deps AS web-build
+WORKDIR /app/apps/web
 COPY apps/shared /app/apps/shared
 COPY apps/web ./
 RUN yarn build
@@ -31,7 +32,7 @@ WORKDIR /app
 COPY apps/server ./apps/server
 # Shared tsconfig base
 COPY packages/tsconfig ./packages/tsconfig
-# Shared app code (safe to include even if unused)
+# Shared app code
 COPY apps/shared ./apps/shared
 WORKDIR /app/apps/server
 RUN yarn build
@@ -51,19 +52,20 @@ FROM node:22-slim AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 
+# Needed for simple-git at runtime
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends git ca-certificates \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p /app/content /app/data
+
 # server runtime deps + compiled output
 COPY --from=server-prod-deps /app/apps/server/node_modules ./apps/server/node_modules
 COPY --from=server-build /app/apps/server/dist ./apps/server/dist
 COPY apps/server/package.json ./apps/server/package.json
 
-# Placeholder files for content and data directories
-COPY content/index.js ./apps/content/index.js
-COPY data/index.js ./apps/data/index.js
-
 # web static build output
 COPY --from=web-build /app/apps/web/dist ./apps/web/dist
 
-# Your compose maps 8080:8080, and your server reads PORT from env
 EXPOSE 8080
 
 # IMPORTANT: run from repo root so process.cwd() points to /app

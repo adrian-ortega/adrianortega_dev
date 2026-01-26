@@ -11,4 +11,11 @@ services:
       APP_PUBLIC_DIR: /app/apps/web/dist
       APP_ORIGIN: https://adrianortega.dev
     ports:
-      - "8080:8080"
+      - "5001:8080"
+    volumes:
+      - content:/app/content
+      - data:/app/data
+
+volumes:
+  content:
+  data:
