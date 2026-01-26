@@ -8,6 +8,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8080
+      APP_PUBLIC_DIR: /app/apps/web/dist
       APP_ORIGIN: https://adrianortega.dev
     ports:
       - "8080:8080"
