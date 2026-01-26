@@ -63,4 +63,4 @@ COPY --from=web-build /app/apps/web/dist ./apps/web/dist
 EXPOSE 8080
 
 # IMPORTANT: run from repo root so process.cwd() points to /app
-CMD ["node", "apps/server/dist/index.js"]
+CMD ["node", "apps/server/dist/server/src/index.js"]
