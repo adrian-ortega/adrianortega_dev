@@ -56,6 +56,10 @@ COPY --from=server-prod-deps /app/apps/server/node_modules ./apps/server/node_mo
 COPY --from=server-build /app/apps/server/dist ./apps/server/dist
 COPY apps/server/package.json ./apps/server/package.json
 
+# Placeholder files for content and data directories
+COPY content/index.js ./apps/content/index.js
+COPY data/index.js ./apps/data/index.js
+
 # web static build output
 COPY --from=web-build /app/apps/web/dist ./apps/web/dist
 
