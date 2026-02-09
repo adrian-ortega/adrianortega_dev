@@ -6,12 +6,12 @@ import { getContentDir } from "../utils/paths";
 const git = simpleGit();
 
 const getConfig = () => {
-  const repoUrl = process.env.GIT_REPO_URL as string | undefined;
-  const repoBranch = process.env.GIT_REPO_BRANCH || "master";
+  const repoUrl = process.env.CONTENT_REPO_URL as string | undefined;
+  const repoBranch = process.env.CONTENT_REPO_BRANCH || "master";
   const contentDir = getContentDir();
 
   if (!repoUrl) {
-    throw new Error("Missing required environment variable: GIT_REPO_URL");
+    throw new Error("Missing required environment variable: CONTENT_REPO_URL");
   }
 
   return {

@@ -3,6 +3,7 @@ import { ColorSchemeSwitcher } from "../ColorSchemeSwitcher/ColorSchemeSwitcher"
 import { Box } from "../Core/Box";
 import { Container } from "../Core/Container";
 import { Group } from "../Core/Group";
+import AppLogo from "./AppLogo";
 
 const AppHeader = () => {
   return (
@@ -13,6 +14,7 @@ const AppHeader = () => {
             <a href={to.home()}>
               <span>Adrian</span>
               <span>Ortega</span>
+              <AppLogo/>
             </a>
           </Box>
           <Group alignItems="center">
