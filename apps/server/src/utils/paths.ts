@@ -15,8 +15,18 @@ const ensureAndReturnDir = (relativePath: string) => {
   return dir;
 }
 
-export const getPublicDir = () => process.env.APP_PUBLIC_DIR ?? path.resolve(projectRoot, "../web/dist");
-
 export const getDataDir = () => process.env.APP_DATA_DIR ?? ensureAndReturnDir("./data");
 
 export const getContentDir = () => process.env.APP_CONTENT_DIR ?? ensureAndReturnDir("./content");
+
+export const getPublicDir = () => {
+  if (process.env.APP_PUBLIC_DIR) return process.env.APP_PUBLIC_DIR;
+
+  const candidates = [
+    path.resolve(projectRoot, "./apps/web/dist"),
+    path.resolve(projectRoot, "../web/dist"),
+  ];
+
+  const found = candidates.find((dir) => fs.existsSync(path.join(dir, "index.html")));
+  return found ?? candidates[0];
+};
