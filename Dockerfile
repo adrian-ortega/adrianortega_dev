@@ -83,7 +83,7 @@ COPY apps/server/package.json ./apps/server/package.json
 COPY --from=web-build /app/apps/web/dist ./apps/web/dist
 
 # baked content repo
-COPY --from=content-build /work/content ./content
+COPY --from=content-build /work/content ./apps/server/content
 
 EXPOSE 8080
 
