@@ -1,6 +1,7 @@
 import http from "node:http";
 
 import { createApp } from "./app";
+import { getContentDir, getDataDir, getPublicDir } from "./utils/paths";
 
 const PORT = Number(process.env.PORT ?? 8080);
 
@@ -16,6 +17,10 @@ export async function startServer() {
       // eslint-disable-next-line no-console
       console.log("⚡️ Cache enabled");
     }
+
+    console.log("Data directory:", getDataDir());
+    console.log("Content directory:", getContentDir());
+    console.log("Public directory:", getPublicDir());
   });
 
   // eslint-disable-next-line no-console
