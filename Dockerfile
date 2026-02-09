@@ -72,7 +72,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # No git in runtime. The image is immutable: content is baked in at build time.
-RUN mkdir -p /app/content /app/data
+RUN mkdir -p /app/apps/server/content /app/apps/server/data
 
 # server runtime deps + compiled output
 COPY --from=server-prod-deps /app/apps/server/node_modules ./apps/server/node_modules
