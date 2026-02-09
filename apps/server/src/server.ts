@@ -10,8 +10,14 @@ export async function startServer() {
 
   await new Promise<void>((resolve) => {
     httpServer.listen(PORT, () => resolve());
+    console.log("Server started");
+    console.log("Environment:", process.env.NODE_ENV || "not set");
+    if (Boolean(process.env.ENABLE_CACHE) === true) {
+      // eslint-disable-next-line no-console
+      console.log("⚡️ Cache enabled");
+    }
   });
 
   // eslint-disable-next-line no-console
-  console.log(`🚀  HTTP:  http://localhost:${PORT}`);
+  console.log(`🚀 HTTP:  http://localhost:${PORT}`);
 }

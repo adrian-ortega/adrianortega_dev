@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "content:sync": "node ./scripts/content-sync.mjs",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "jest --runInBand"
