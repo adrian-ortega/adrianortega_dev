@@ -55,7 +55,8 @@ docker:build_and_push:
     - |
       docker build \
         --build-arg CONTENT_REPO_URL="$CONTENT_REPO_URL" \
-        --build-arg CONTENT_REPO_BRANCH="${CONTENT_REPO_BRANCH:-main}" \
+        --build-arg CONTENT_REPO_BRANCH="$CONTENT_REPO_BRANCH" \
+        --build-arg VITE_API_BASE_URL="$VITE_API_BASE_URL" \
         -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" \
         .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
