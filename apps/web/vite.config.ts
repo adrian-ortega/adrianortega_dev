@@ -6,10 +6,13 @@ export default defineConfig({
   server: {
     proxy: {
       "/assets": {
-        target: "http://localhost:3000",
+        target: "http://localhost:8080",
+      },
+      "/content-assets": {
+        target: "http://localhost:8080",
       },
       "/api": {
-        target: "http://localhost:3000",
+        target: "http://localhost:8080",
       },
     },
   },

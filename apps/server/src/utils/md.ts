@@ -1,5 +1,6 @@
 import MarkdownPrism from "markdown-it-prism";
 import MarkdownIt from "markdown-it";
+import { rewriteAssetUrls } from "./rewriteAssetUrls";
 
 const markdownIt = MarkdownIt({
   html: true,
@@ -8,5 +9,6 @@ const markdownIt = MarkdownIt({
 }).use(MarkdownPrism);
 
 export const parseMarkdown = (content: string) => {
-  return markdownIt.render(content.trim());
+  const html = markdownIt.render(content.trim());
+  return rewriteAssetUrls(html);
 };

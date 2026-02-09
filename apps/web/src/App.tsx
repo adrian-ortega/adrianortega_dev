@@ -8,6 +8,7 @@ function App() {
   const router = createRouter();
   return (
     <Stack className="App-root" gap={0}>
+      <title>Adrian Ortega - Software Engineer</title>
       <AppHeader/>
       <RouterProvider router={router} />
       <AppFooter/>

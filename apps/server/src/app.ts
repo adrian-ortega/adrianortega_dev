@@ -10,6 +10,8 @@ import { errorHandler } from "./middleware/errorHandler";
 import { getContentDir, getPublicDir } from "./utils/paths";
 
 const APP_ORIGIN = process.env.APP_ORIGIN ?? "http://localhost:5173";
+const CONTENT_DIR = process.env.CONTENT_DIR || path.join(process.cwd(), "content");
+const CONTENT_ASSETS_DIR = path.join(CONTENT_DIR, "assets");
 
 export function createApp() {
   const app = express();
@@ -56,7 +58,9 @@ export function createApp() {
   // (Vite puts JS/CSS in /assets; copying images there can blank the site.)
   app.use(
     "/content-assets",
-    express.static(path.join(getContentDir(), "assets"), { index: false }),
+    express.static(CONTENT_ASSETS_DIR, {
+      fallthrough: false,
+    })
   );
 
   // SPA fallback: any non-API, non-static route gets index.html

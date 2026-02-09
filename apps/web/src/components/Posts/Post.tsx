@@ -27,6 +27,7 @@ export function Post() {
 
   return loading ? (
     <Box className="Post-root">
+      <title>Loading... - Adrian Ortega</title>
       <Container>
         <h1>Loading...</h1>
       </Container>
@@ -38,17 +39,20 @@ export function Post() {
           <h1 className="Post-title">{post ? post.title : "Post Component"}</h1>
           <Group alignItems="center">
             <Box className="Post-published">
-              {format(post!.created_at as string, "PP pp")}
+              {format(post?.created_at as string, "PP pp")}
             </Box>
             <IconCircleFilled size={4} color="var(--colors-primary-7)" />
             <PostTags post={post!} />
           </Group>
           {post?.cover_image && (
             <Box className="Post-cover">
-                <img src={post.cover_image} alt={post.title} />
-                <Box className="Post-coverBg" style={{
+              <img src={post.cover_image} alt={post.title} />
+              <Box
+                className="Post-coverBg"
+                style={{
                   backgroundImage: `url(${post.cover_image})`,
-                }} />
+                }}
+              />
             </Box>
           )}
         </Box>

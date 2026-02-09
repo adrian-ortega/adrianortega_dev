@@ -5,8 +5,7 @@ import { readJSON, writeJSON } from "../utils/files";
 
 const dataDir = getDataDir();
 
-// const isEnabled = () => getSetting('cached', true);
-const isEnabled = async () => true;
+const isEnabled = async () => Boolean(process.env.ENABLE_CACHE) || true;
 
 const getCacheFilePath = (entityType: string): string =>
   path.resolve(dataDir, `entity.${entityType}.json`);

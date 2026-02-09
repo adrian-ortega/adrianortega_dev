@@ -23,6 +23,7 @@ export function AboutPage() {
 
   return (
     <Box className="About-root">
+      <title>About - Adrian Ortega</title>
       <MarkdownContent content={page ? page.content : "Loading..."} />
     </Box>
   );

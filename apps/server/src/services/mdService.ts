@@ -17,6 +17,36 @@ enum DIR_MAP {
   SIDEBAR = "sidebars",
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (value === null || typeof value !== "object") return false;
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
+
+export function normalizeAssetPath<T>(value: T): T {
+  if (value instanceof Date) return value;
+
+  if (typeof value === "string") {
+    return value.replace(/^(\/|\.\/|\.\.\/)?assets\//, "/content-assets/") as unknown as T;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((v) => normalizeAssetPath(v)) as unknown as T;
+  }
+
+  if (isPlainObject(value)) {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) {
+      out[k] = normalizeAssetPath(v);
+    }
+    return out as unknown as T;
+  }
+
+  // Everything else (Map, Set, RegExp, Buffer, class instances, etc.) stays untouched
+  return value;
+}
+
+
 export const getEntityDir = (entityType: ENTITY_TYPE): string => {
   return path.join(getContentDir(), DIR_MAP[entityType.toUpperCase() as keyof typeof DIR_MAP]);
 }
@@ -37,11 +67,13 @@ export const getFiles = (entityType: ENTITY_TYPE): string[] => {
 const defaultConverter = <T extends MdEntity>(file: string, entityType: ENTITY_TYPE): T => {
   const filePath = path.join(getEntityDir(entityType), file);
   const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(fileContent);
+  const parsed = matter(fileContent);
+  parsed.data = normalizeAssetPath(parsed.data);
+
   return {
-    ...data,
+    ...parsed.data,
     slug: slugify(file.replace(`${entityType}.`, "").replace(".md", "")),
-    content: parseMarkdown(content.trim()),
+    content: parseMarkdown(parsed.content.trim()),
   } as T;
 };
 
@@ -55,6 +87,7 @@ export const getEntities = async <T extends MdEntity>(
     const files = getFiles(entityType);
     const entities = files.map((file) => defaultConverter<T>(file, entityType)) as T[];
     data = converters.reduce((acc, converter) => acc.map(converter), entities);
+
     await setInCache(entityType, data);
   }
   return data;

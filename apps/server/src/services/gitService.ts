@@ -7,7 +7,7 @@ const git = simpleGit();
 
 const getConfig = () => {
   const repoUrl = process.env.GIT_REPO_URL as string | undefined;
-  const repoBranch = process.env.GIT_REPO_BRANCH || "main";
+  const repoBranch = process.env.GIT_REPO_BRANCH || "master";
   const contentDir = getContentDir();
 
   if (!repoUrl) {
