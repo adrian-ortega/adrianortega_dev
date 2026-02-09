@@ -9,6 +9,7 @@
     "test": "jest --runInBand"
   },
   "dependencies": {
+    "@sentry/node": "^10.38.0",
     "body-parser": "^2.2.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
