@@ -15,9 +15,35 @@ const ensureAndReturnDir = (relativePath: string) => {
   return dir;
 }
 
-export const getDataDir = () => process.env.APP_DATA_DIR ?? ensureAndReturnDir("./data");
+export const getDataDir = () => {
+  if(process.env.APP_DATA_DIR) {
+    ensureDirectoryExists(process.env.APP_DATA_DIR);
+    return process.env.APP_DATA_DIR;
+  }
+  
+  const candidates = [
+    path.resolve(projectRoot, "./apps/server/data"),
+    path.resolve(projectRoot, "../server/data"),
+  ];
+  
+  const found = candidates.find((dir) => fs.existsSync(dir));
+  return found ?? ensureAndReturnDir("./apps/server/data");
+};
 
-export const getContentDir = () => process.env.APP_CONTENT_DIR ?? ensureAndReturnDir("./content");
+export const getContentDir = () => {
+  if (process.env.APP_CONTENT_DIR) {
+    ensureDirectoryExists(process.env.APP_CONTENT_DIR);
+    return process.env.APP_CONTENT_DIR;
+  }
+
+  const candidates = [
+    path.resolve(projectRoot, "./apps/server/content"),
+    path.resolve(projectRoot, "../server/content"),
+  ];
+
+  const found = candidates.find((dir) => fs.existsSync(dir));
+  return found ?? ensureAndReturnDir("./apps/server/content");
+}
 
 export const getPublicDir = () => {
   if (process.env.APP_PUBLIC_DIR) return process.env.APP_PUBLIC_DIR;
