@@ -1,25 +1,32 @@
 import simpleGit from "simple-git";
 import fs from "fs";
 import path from "path";
-import { copyDirectory } from "../utils/files";
-import { getContentDir, getPublicDir } from "../utils/paths";
+import { getContentDir } from "../utils/paths";
 
 const git = simpleGit();
-const GIT_REPO_URL = process.env.GIT_REPO_URL as string;
-const GIT_REPO_BRANCH = process.env.GIT_REPO_BRANCH || "main";
-const GIT_CONTENT_DIR = getContentDir();
 
-if (!GIT_REPO_URL || !GIT_CONTENT_DIR) {
-  throw new Error(
-    "Missing required environment variables (GIT_REPO_URL or GIT_CONTENT_DIR)."
-  );
-}
+const getConfig = () => {
+  const repoUrl = process.env.GIT_REPO_URL as string | undefined;
+  const repoBranch = process.env.GIT_REPO_BRANCH || "main";
+  const contentDir = getContentDir();
+
+  if (!repoUrl) {
+    throw new Error("Missing required environment variable: GIT_REPO_URL");
+  }
+
+  return {
+    repoUrl,
+    repoBranch,
+    contentDir,
+  };
+};
 
 export async function getRemoteHash() {
   try {
+    const { repoUrl, repoBranch } = getConfig();
     const remoteHash = await git
       .silent(true)
-      .listRemote([GIT_REPO_URL, GIT_REPO_BRANCH])
+      .listRemote([repoUrl, repoBranch])
       .then((result) => {
         const lines = result.trim().split("\n");
         if (lines.length > 0) {
@@ -37,7 +44,8 @@ export async function getRemoteHash() {
 
 export async function getHash() {
   try {
-    const hash = await git.cwd(GIT_CONTENT_DIR).revparse(["--short", "HEAD"]);
+    const { contentDir } = getConfig();
+    const hash = await git.cwd(contentDir).revparse(["--short", "HEAD"]);
     return hash;
   } catch (error) {
     console.error("Error getting Git hash:", error);
@@ -46,19 +54,21 @@ export async function getHash() {
 }
 
 export async function isRepoCloned() {
-  return fs.existsSync(path.join(GIT_CONTENT_DIR, ".git"));
+  const { contentDir } = getConfig();
+  return fs.existsSync(path.join(contentDir, ".git"));
 }
 
 export async function syncRepository() {
   let syncType = "cloned";
   try {
+    const { repoUrl, repoBranch, contentDir } = getConfig();
     if (await isRepoCloned()) {
       console.info("Pulling latest changes from repository...");
-      await git.cwd(GIT_CONTENT_DIR).pull("origin", GIT_REPO_BRANCH);
+      await git.cwd(contentDir).pull("origin", repoBranch);
       syncType = "updated";
     } else {
       console.info("Cloning repository...");
-      await git.clone(GIT_REPO_URL, GIT_CONTENT_DIR);
+      await git.clone(repoUrl, contentDir);
     }
   } catch (error) {
     console.error("Error syncing repository:", error);
@@ -70,25 +80,8 @@ export async function syncRepository() {
   return {
     type: syncType,
     hash: await getHash(),
-    images: await syncImages(),
+    // No more copying content images into the web build output.
+    // The server now serves images directly from /content-assets.
+    images: false,
   };
-}
-
-export async function syncImages() {
-  const assetsDir = path.join(GIT_CONTENT_DIR, "assets");
-  const publicAssetsDir = path.join(getPublicDir(), "assets");
-
-  if (!fs.existsSync(assetsDir)) {
-    console.info("No assets directory found.");
-    return false;
-  }
-
-  if (fs.existsSync(publicAssetsDir)) {
-    fs.rmSync(publicAssetsDir, { recursive: true });
-  }
-
-  copyDirectory(assetsDir, publicAssetsDir);
-  console.info("Images synchronized successfully.");
-
-  return true;
 }

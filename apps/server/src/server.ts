@@ -2,7 +2,7 @@ import http from "node:http";
 
 import { createApp } from "./app";
 
-const PORT = Number(process.env.PORT ?? 3000);
+const PORT = Number(process.env.PORT ?? 8080);
 
 export async function startServer() {
   const app = createApp();

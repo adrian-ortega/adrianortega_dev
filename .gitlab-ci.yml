@@ -52,7 +52,12 @@ docker:build_and_push:
     - docker info
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
   script:
-    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - |
+      docker build \
+        --build-arg CONTENT_REPO_URL="$CONTENT_REPO_URL" \
+        --build-arg CONTENT_REPO_BRANCH="${CONTENT_REPO_BRANCH:-main}" \
+        -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" \
+        .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
 
     # main branch => also push latest

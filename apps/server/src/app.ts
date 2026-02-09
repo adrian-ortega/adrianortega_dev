@@ -7,7 +7,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { apiRouter } from "./routes/api";
 import { notFound } from "./middleware/notFound";
 import { errorHandler } from "./middleware/errorHandler";
-import { getPublicDir } from "./utils/paths";
+import { getContentDir, getPublicDir } from "./utils/paths";
 
 const APP_ORIGIN = process.env.APP_ORIGIN ?? "http://localhost:5173";
 
@@ -46,16 +46,23 @@ export function createApp() {
   // server from the project root (/app in Docker, repo root locally).
   // The built web app always lives at apps/web/dist relative to that root.
   const clientDistPath = getPublicDir();
-  
-  // SPA fallback: for any non-API route, send index.html
-  app.get(/^\/(?!api|assets).*/, (req, res, next) => {
-    if (req.path.startsWith("/api") || req.path.startsWith("/assets")) {
-      return next();
-    }
+
+  // Serve static web build output first.
+  // IMPORTANT: `index: false` prevents Express from auto-serving index.html,
+  // so our SPA fallback below is the *only* way index.html is returned.
+  app.use(express.static(clientDistPath, { index: false }));
+
+  // Serve content repository assets without colliding with Vite's /assets/*.
+  // (Vite puts JS/CSS in /assets; copying images there can blank the site.)
+  app.use(
+    "/content-assets",
+    express.static(path.join(getContentDir(), "assets"), { index: false }),
+  );
+
+  // SPA fallback: any non-API, non-static route gets index.html
+  app.get(/^\/(?!api|assets|content-assets).*/, (req, res) => {
     return res.sendFile(path.join(clientDistPath, "index.html"));
   });
-  
-  app.use(express.static(clientDistPath));
   // ---------------------------
   // 404 + error handling
   // ---------------------------
