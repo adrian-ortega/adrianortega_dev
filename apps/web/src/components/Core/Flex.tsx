@@ -7,6 +7,8 @@ export type FlexOwnProps = {
   alignItems?: React.CSSProperties["alignItems"];
   justifyContent?: React.CSSProperties["justifyContent"];
   flexDirection?: React.CSSProperties["flexDirection"];
+  grow?: React.CSSProperties["flexGrow"] | boolean;
+  shrink?: React.CSSProperties["flexShrink"] | boolean;
 };
 
 export type FlexProps<C extends React.ElementType = "div"> = BoxProps<C> &
@@ -20,6 +22,8 @@ export function Flex<C extends React.ElementType = "div">({
   justifyContent,
   flexDirection,
   className,
+  grow,
+  shrink,
   ...boxProps
 }: FlexProps<C>) {
   const _style: React.CSSProperties = {
@@ -29,6 +33,14 @@ export function Flex<C extends React.ElementType = "div">({
     flexDirection,
     ...style,
   };
+
+  if (grow) {
+    _style.flexGrow = (typeof grow === "boolean" && grow) ? 1 : grow;
+  }
+
+  if (shrink) {
+    _style.flexShrink = (typeof shrink === "boolean" && shrink) ? 1 : shrink;
+  }
 
   return (
     <Box<C>

@@ -36,6 +36,7 @@ export const usePages = (): UsePagesReturnType => {
   };
 
   const fetchBySlug = async (slug: string): Promise<PageEntity | null> => {
+    setLoading(true);
     try {
       const response = await fetch(`/api/pages/${slug}`);
       const responseData: PageResponse = await response.json();
@@ -52,6 +53,8 @@ export const usePages = (): UsePagesReturnType => {
       return responseData;
     } catch (error) {
       console.error("Failed to fetch pages:", error);
+    } finally {
+      setLoading(false);
     }
     return null;
   };

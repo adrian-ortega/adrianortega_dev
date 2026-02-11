@@ -1,3 +1,4 @@
+import type { BoxProps } from "../Core/Box";
 import { MarkdownContentComponentRenderer } from "./MarkdownContentComponentRenderer";
 
 const SHORTCODE_REGEX = /\{\{\s*([\w]+)([\s\S]*?)\s*\}\}/g;
@@ -34,12 +35,12 @@ const parseShortcodes = (content: string) => {
   });
 };
 
-type MarkdownContentProps = {
+type MarkdownContentProps = BoxProps & {
   content: string;
 };
 
-export function MarkdownContent({ content }: MarkdownContentProps) {
+export function MarkdownContent({ content, ...rendererProps }: MarkdownContentProps) {
   return (
-    <MarkdownContentComponentRenderer content={parseShortcodes(content)} />
+    <MarkdownContentComponentRenderer content={parseShortcodes(content)} {...rendererProps} />
   )
 }

@@ -28,7 +28,7 @@ const BoxInner = <C extends ElementType = "div">(
   ref: React.Ref<C>
 ) => {
   const Component = (component ?? "div") as ElementType;
-  const _className = classNames(["Box-root", className]);
+  const _className = classNames([className]);
 
   return (
     <Component ref={ref} className={_className} {...rest}>
