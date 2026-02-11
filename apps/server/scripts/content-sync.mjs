@@ -19,7 +19,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
-const repo = process.env.CONTENT_REPO;
+const repo = process.env.CONTENT_REPO || "https://github.com/adrian-ortega/posts.git";
 const branch = process.env.CONTENT_BRANCH || "master";
 const dir = process.env.CONTENT_DIR || "./content";
 const cache = process.env.CONTENT_CACHE_DIR || "./data";
