@@ -49,8 +49,8 @@ RUN yarn install --frozen-lockfile --production=true
 # Build: Content (Git clone at build time)
 # ------------------------------------------------------------
 FROM node:22-slim AS content-build
-ARG CONTENT_REPO_URL
-ARG CONTENT_REPO_BRANCH=main
+ARG CONTENT_REPO_URL="https://github.com/adrian-ortega/posts.git"
+ARG CONTENT_REPO_BRANCH=master
 WORKDIR /work
 
 RUN apt-get update \
