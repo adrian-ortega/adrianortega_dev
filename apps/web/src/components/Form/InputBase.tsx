@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEventHandler } from "react";
+import { type ChangeEventHandler } from "react";
 import { classNames } from "../../utils/components/attributes";
 import { Stack, type StackProps } from "../Core/Stack";
 import { InputError } from "./InputError";
@@ -24,14 +24,12 @@ export function InputBase({
   value,
 }: InputTextProps) {
   const htmlId = `input-${type}-${name}`;
-  const [_value, _setValue] = useState<string | undefined>(value);
-
-  useEffect(() => {
-    _setValue(value);
-  }, [value]);
-
   return (
-    <Stack className={classNames(["InputBase-root", className])} grow>
+    <Stack className={classNames([
+      "InputBase-root",
+      error ? "InputBase-error" : undefined,
+      className
+    ])} grow>
       <InputLabel label={label} required={required} for={name} />
       <input
         id={htmlId}
@@ -41,7 +39,7 @@ export function InputBase({
         required={required}
         disabled={disabled}
         onChange={onChange}
-        value={_value}
+        value={value ?? ""}
       />
       <InputError error={error} />
     </Stack>

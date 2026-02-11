@@ -4,7 +4,6 @@ import { usePages } from "../../utils/usePages";
 import { useEffect, useState } from "react";
 import { type PageEntity } from "../../../../shared/types";
 import { MarkdownContent } from "../MarkdownContent/MarkdownContent";
-import { Group } from "../Core/Group";
 import { ContactForm } from "../Contact/ContactForm";
 import { Container } from "../Core/Container";
 
@@ -28,17 +27,13 @@ export function ContactPage() {
     <>
       <title>Contact - Adrian Ortega</title>
       <Box className="Contact-root">
-        <Container>
-          <Group>
-            <MarkdownContent
-              className="Contact-content"
-              content={page ? page.content : "Loading..."}
-              style={{ flex: 1 }}
-            />
-            <Box style={{ flex: 1 }}>
-              <ContactForm />
-            </Box>
-          </Group>
+        <Container maxWidth="sm">
+          <MarkdownContent
+            className="Contact-content"
+            content={page ? page.content : "Loading..."}
+            style={{ flex: 1 }}
+          />
+          <ContactForm />
         </Container>
       </Box>
     </>

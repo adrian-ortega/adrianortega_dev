@@ -72,7 +72,12 @@ export function useForm<T extends FormValues>({ initialValues, validate }: UseFo
   };
 
   const reset = () => {
-    setValues({} as T);
+    const keys = Object.keys(initialValues) as (keyof T)[];
+    const resetValues = keys.reduce((acc, key) => {
+      acc[key] = initialValues[key];
+      return acc;
+    }, {} as T);
+    setValues(resetValues);
     setErrors({} as Record<keyof T, string|null>);
   };
 

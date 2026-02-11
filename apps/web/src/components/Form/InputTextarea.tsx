@@ -19,6 +19,7 @@ export function InputTextarea({
   disabled,
   rows = 4,
   error,
+  value,
   onChange,
 }: InputTextareaProps) {
   const htmlId = `input-${name}`;
@@ -38,6 +39,7 @@ export function InputTextarea({
         required={required}
         disabled={disabled}
         rows={rows}
+        value={value ?? ""}
         onChange={onChange}
       />
       <InputError error={error} />
