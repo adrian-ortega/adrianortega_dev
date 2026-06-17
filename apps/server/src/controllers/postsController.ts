@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { listPostsByCategory, readPostFile } from "../services/postsService";
+import { makeSlugController } from "./entityController";
 
 export async function listPosts(_req: Request, res: Response, next: NextFunction) {
   try {
@@ -16,21 +17,4 @@ export async function listPosts(_req: Request, res: Response, next: NextFunction
   }
 }
 
-export async function getPostBySlug(req: Request, res: Response, next: NextFunction) {
-  try {
-    const slug = String(req.params.slug || "").trim();
-    if (!slug) {
-      const err: any = new Error("Missing slug");
-      err.status = 400;
-      throw err;
-    }
-    const post = await readPostFile(slug);
-    return res.json(post);
-  } catch (e) {
-    if ((e as Error).message === "Post not found") {
-      return res.status(404).json({ error: "Post not found" });
-    }
-
-    return next(e);
-  }
-}
+export const getPostBySlug = makeSlugController(readPostFile, "Post");
