@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { healthRouter } from "./health";
 import { pagesRouter } from "./pages";
-import { syncRouter } from "./sync";
 import { postsRouter } from "./posts";
 import { widgetsRouter } from "./widgets";
 import { sidebarsRouter } from "./sidebars";
@@ -17,4 +16,3 @@ apiRouter.use('/tags', tagsRouter);
 apiRouter.use('/sidebars', sidebarsRouter);
 apiRouter.use('/notifications', notificationsRouter);
 apiRouter.use('/widgets', widgetsRouter);
-apiRouter.use('/sync', syncRouter);
