@@ -13,11 +13,7 @@ export async function startServer() {
     httpServer.listen(PORT, () => resolve());
     console.log("Server started");
     console.log("Environment:", process.env.NODE_ENV || "not set");
-    if (Boolean(process.env.ENABLE_CACHE) === true) {
-      // eslint-disable-next-line no-console
-      console.log("⚡️ Cache enabled");
-    }
-
+    console.log("Cache:", process.env.ENABLE_CACHE === "false" ? "disabled" : "enabled");
     console.log("Data directory:", getDataDir());
     console.log("Content directory:", getContentDir());
     console.log("Public directory:", getPublicDir());
