@@ -5,10 +5,13 @@ services:
     restart: unless-stopped
     ports:
       - "5001:8080"
+    environment:
+      - APP_CONTENT_DIR=/app/apps/server/content
     volumes:
-      - content:/app/apps/server/content
+      # Bind mount: place your markdown content on the host at this path
+      - /opt/adrianortega.dev/content:/app/apps/server/content
+      # Named volume: persists the parsed-content JSON cache across restarts
       - data:/app/apps/server/data
 
 volumes:
-  content:
   data:
