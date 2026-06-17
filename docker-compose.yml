@@ -9,7 +9,7 @@ services:
       - APP_CONTENT_DIR=/app/apps/server/content
     volumes:
       # Bind mount: place your markdown content on the host at this path
-      - /opt/adrianortega.dev/content:/app/apps/server/content
+      - /home/adrian/content/adrianortega.dev:/app/apps/server/content
       # Named volume: persists the parsed-content JSON cache across restarts
       - data:/app/apps/server/data
 
