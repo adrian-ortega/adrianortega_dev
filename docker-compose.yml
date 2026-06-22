@@ -1,6 +1,6 @@
 services:
   app:
-    image: registry.gitlab.com/adrian.ortega/adrianortega.dev:latest
+    image: git.ortegas.co/adrian/adrianortega_dev:latest
     container_name: adrianortegadev
     restart: unless-stopped
     ports:
