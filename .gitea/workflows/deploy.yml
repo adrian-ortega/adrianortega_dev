@@ -60,6 +60,4 @@ jobs:
           docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
           docker push ${{ env.IMAGE }}:latest
 
-      - name: Deploy via Portainer webhook
-        if: github.ref_name == 'main'
-        run: curl -fsSL -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}"
+      # Deploy is handled by Watchtower on 202, which polls the registry every 5 min
