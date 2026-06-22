@@ -53,7 +53,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # Content and data directories are supplied at runtime via volume mounts.
-RUN mkdir -p /app/apps/server/content /app/apps/server/data
+RUN mkdir -p /app/content /app/data
 
 # server runtime deps + compiled output
 COPY --from=server-prod-deps /app/apps/server/node_modules ./apps/server/node_modules
