@@ -1,6 +1,6 @@
 services:
   app:
-    image: git.ortegas.co/adrian/adrianortega_dev:latest
+    image: ${REGISTRY_HOST}/adrianortega-dev:latest
     container_name: adrianortegadev
     restart: unless-stopped
     ports:
