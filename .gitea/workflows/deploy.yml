@@ -1,0 +1,62 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ["[0-9]+.[0-9]+.[0-9]+*"]
+
+env:
+  REGISTRY: git.ortegas.co
+  IMAGE: git.ortegas.co/adrian/adrianortega_dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Server tests
+        run: |
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+          cd apps/server
+          yarn install --frozen-lockfile
+          yarn test
+
+      - name: Web build check
+        run: |
+          cd apps/web
+          yarn install --frozen-lockfile
+          yarn build
+
+  docker:
+    runs-on: docker
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Gitea registry
+        run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.REGISTRY_USER }}" --password-stdin
+
+      - name: Build & push
+        run: |
+          docker build -t ${{ env.IMAGE }}:${{ github.sha }} .
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+
+      - name: Tag latest (main branch)
+        if: github.ref_name == 'main'
+        run: |
+          docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
+          docker push ${{ env.IMAGE }}:latest
+
+      - name: Tag semver release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:${{ github.ref_name }}
+          docker push ${{ env.IMAGE }}:${{ github.ref_name }}
+          docker tag ${{ env.IMAGE }}:${{ github.sha }} ${{ env.IMAGE }}:latest
+          docker push ${{ env.IMAGE }}:latest
+
+      - name: Deploy via Portainer webhook
+        if: github.ref_name == 'main'
+        run: curl -fsSL -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}"
