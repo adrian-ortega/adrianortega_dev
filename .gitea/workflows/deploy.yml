@@ -25,7 +25,7 @@ jobs:
       - name: Web build check
         run: |
           cd apps/web
-          yarn install --frozen-lockfile
+          yarn install
           yarn build
 
   docker:
@@ -40,7 +40,10 @@ jobs:
 
       - name: Build & push
         run: |
-          docker build -t ${{ env.IMAGE }}:${{ github.ref_name }} -t ${{ env.IMAGE }}:latest .
+          docker build \
+            --build-arg VITE_SENTRY_DSN=${{ vars.VITE_SENTRY_DSN }} \
+            -t ${{ env.IMAGE }}:${{ github.ref_name }} \
+            -t ${{ env.IMAGE }}:latest .
           docker push ${{ env.IMAGE }}:${{ github.ref_name }}
           docker push ${{ env.IMAGE }}:latest
 

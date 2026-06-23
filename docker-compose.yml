@@ -8,6 +8,7 @@ services:
     environment:
       - APP_CONTENT_DIR=/app/content
       - APP_DATA_DIR=/app/data
+      - SENTRY_DSN=${SENTRY_DSN}
     volumes:
       # Bind mount: place your markdown content on the host at this path
       - /home/adrian/content/adrianortega.dev:/app/content

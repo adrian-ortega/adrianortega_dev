@@ -10,12 +10,14 @@ RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 FROM base AS web-deps
 WORKDIR /app/apps/web
 COPY apps/web/package.json apps/web/yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 FROM web-deps AS web-build
 WORKDIR /app/apps/web
 COPY apps/shared /app/apps/shared
 COPY apps/web ./
+ARG VITE_SENTRY_DSN
+ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
 RUN yarn build
 
 # ------------------------------------------------------------
