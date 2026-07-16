@@ -56,6 +56,7 @@ export function createApp() {
 
   // Serve content repository assets without colliding with Vite's /assets/*.
   // (Vite puts JS/CSS in /assets; copying images there can blank the site.)
+  // @TODO is this necessary?
   app.use(
     "/content-assets",
     express.static(CONTENT_ASSETS_DIR, {
