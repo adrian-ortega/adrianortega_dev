@@ -13,6 +13,7 @@ type ButtonProps<C extends ElementType = "button"> = BoxProps<C> & {
 
 export function Button<C extends ElementType = "button">({
   children,
+  className,
   variant = "filled",
   color = "primary",
   disabled,
@@ -27,6 +28,7 @@ export function Button<C extends ElementType = "button">({
         "Button-root",
         variantName !== "default" ? `Button-${variantName}` : undefined,
         colorName !== "default" ? `Button-${colorName}` : undefined,
+        className
       ])}
       component="button"
       disabled={disabled}
