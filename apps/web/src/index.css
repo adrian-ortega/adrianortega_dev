@@ -142,6 +142,18 @@ a {
   padding: 3rem 0;
 }
 
+.Posts-title {
+  font-size: var(--font-size-h5);
+  font-family: var(--font-family-headings);
+  margin-bottom: 1.2em;
+  border-bottom: 1px solid var(--colors-gray-1);
+
+  & span {
+    font-weight: var(--font-weight-bold);
+    color: var(--colors-primary-8);
+  }
+}
+
 .PostTags-root {
   & a {
     text-decoration: none;
@@ -159,20 +171,26 @@ a {
   }
 }
 
+.Posts-header {
+  margin-bottom: 1.3em;
+}
+
+.Posts-header,
 .PostPreviews-root {
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
   }
+}
 
-  & .PostPreview-root {
-    @media screen and (min-width: 768px) {
-      grid-column: 2 / span 10;
-    }
+.Posts-header h1,
+.PostPreviews-root .PostPreview-root {
+  @media screen and (min-width: 768px) {
+    grid-column: 2 / span 10;
+  }
 
-    @media screen and (min-width: 1024px) {
-      grid-column: 3 / span 8;
-    }
+  @media screen and (min-width: 1024px) {
+    grid-column: 3 / span 8;
   }
 }
 

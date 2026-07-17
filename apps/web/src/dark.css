@@ -38,6 +38,15 @@
   color: var(--colors-dark-1)
 }
 
+.dark-mode .Posts-title {
+  color: var(--colors-dark-5);
+  border-bottom-color: var(--colors-dark-7);
+
+  & span {
+    color: var(--colors-primary-6);
+  }
+}
+
 .dark-mode .Content-root {
   & h1,
   & h2 {
