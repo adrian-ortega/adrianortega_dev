@@ -9,6 +9,13 @@ services:
       - APP_CONTENT_DIR=/app/content
       - APP_DATA_DIR=/app/data
       - SENTRY_DSN=${SENTRY_DSN}
+      # Contact form → MySQL on 234 (see setup.sql)
+      - DB_HOST=${DB_HOST:-192.168.0.234}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_NAME=${DB_NAME:-adrianortegadev}
+      - DB_USER=${DB_USER:-aodev}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - CONTACT_NONCE_SECRET=${CONTACT_NONCE_SECRET}
     volumes:
       # Bind mount: markdown content lives on CASAORTEGA (\\CASAORTEGA\CasaShare\Apps),
       # reached via the host's CIFS mount of //192.168.0.234/CasaShare at /mnt/casashare

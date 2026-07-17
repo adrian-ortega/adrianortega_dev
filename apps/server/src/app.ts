@@ -16,6 +16,10 @@ const CONTENT_ASSETS_DIR = path.join(CONTENT_DIR, "assets");
 export function createApp() {
   const app = express();
 
+  // Behind the Cloudflare tunnel + Docker network, the client IP arrives via
+  // X-Forwarded-For. Needed for contact form rate limiting to key on real IPs.
+  app.set("trust proxy", true);
+
   // ---------------------------
   // Global middleware
   // ---------------------------

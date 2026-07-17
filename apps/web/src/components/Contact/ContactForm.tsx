@@ -14,8 +14,14 @@ type ContactFormValues = {
   message: string;
 }
 
+type SubmitStatus = {
+  ok: boolean;
+  message: string;
+}
+
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus | null>(null);
   const form = useForm<ContactFormValues>({
     initialValues: {} as ContactFormValues,
     validate: {
@@ -37,14 +43,39 @@ export function ContactForm() {
       },
     },
   });
-  const onSubmit = (values: ContactFormValues) => {
+
+  const onSubmit = async (values: ContactFormValues) => {
     setLoading(true);
-    setTimeout(() => {
-      console.log('Done submitting', values);
-      alert("You didn't finish this part");
-      setLoading(false);
+    setStatus(null);
+    try {
+      const nonceResponse = await fetch("/api/contact/nonce");
+      const { nonce } = await nonceResponse.json();
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, nonce }),
+      });
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        setStatus({
+          ok: false,
+          message: data.message ?? "Something went wrong. Please try again.",
+        });
+        return;
+      }
+
+      setStatus({ ok: true, message: data.message });
       form.reset();
-    }, 2000);
+    } catch {
+      setStatus({
+        ok: false,
+        message: "Could not reach the server. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,6 +107,14 @@ export function ContactForm() {
             disabled={loading}
             {...form.getInputProps("message")}
           />
+          {status && (
+            <Box
+              className={`ContactForm-status ${status.ok ? "is-success" : "is-error"}`}
+              role="status"
+            >
+              {status.message}
+            </Box>
+          )}
           <Button type="submit" disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </Button>

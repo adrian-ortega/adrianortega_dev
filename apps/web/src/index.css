@@ -727,3 +727,22 @@ a {
     animation: spin 1s linear infinite;
   }
 }
+
+.ContactForm-status {
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  border-radius: 0.25em;
+  border: 1px solid;
+
+  &.is-success {
+    color: var(--colors-primary-9);
+    border-color: var(--colors-primary-7);
+    background: var(--colors-primary-1);
+  }
+
+  &.is-error {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    background: color-mix(in srgb, var(--danger-color) 8%, transparent);
+  }
+}

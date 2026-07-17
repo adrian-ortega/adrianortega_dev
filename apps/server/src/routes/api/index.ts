@@ -6,6 +6,7 @@ import { widgetsRouter } from "./widgets";
 import { sidebarsRouter } from "./sidebars";
 import { notificationsRouter } from "./notifications";
 import { tagsRouter } from "./tags";
+import { contactRouter } from "./contact";
 
 export const apiRouter = Router();
 
@@ -16,3 +17,4 @@ apiRouter.use('/tags', tagsRouter);
 apiRouter.use('/sidebars', sidebarsRouter);
 apiRouter.use('/notifications', notificationsRouter);
 apiRouter.use('/widgets', widgetsRouter);
+apiRouter.use('/contact', contactRouter);
