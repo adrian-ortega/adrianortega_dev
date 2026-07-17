@@ -10,11 +10,12 @@ import { Loading } from "../Core/Loading";
 
 type PostsProps = {
   tag?: string;
+  showDetails?: boolean
 }
 
-const Posts = ({ tag }: PostsProps) => {
+const Posts = ({ tag, showDetails }: PostsProps) => {
   const navigate = useNavigate();
-  const [posts, { loading, refetch }] = usePosts();
+  const [posts, { loading, refetch, tag: tagEntity }] = usePosts();
 
   useEffect(() => {
     refetch(tag as string).catch(() => {
@@ -26,6 +27,13 @@ const Posts = ({ tag }: PostsProps) => {
     <>
       <title>Posts - Adrian Ortega</title>
       <Box className="Posts-root">
+        <Container>
+          {showDetails && (
+            <Stack className="Posts-header" gap={64}>
+              <h1 className="Posts-title">Posts under <span>{tagEntity?.name}</span></h1>
+            </Stack>
+          )}
+        </Container>
         <Container>
           {loading ? (
             <Loading />

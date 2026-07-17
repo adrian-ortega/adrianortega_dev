@@ -10,7 +10,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { getContentDir, getPublicDir } from "./utils/paths";
 
 const APP_ORIGIN = process.env.APP_ORIGIN ?? "http://localhost:5173";
-const CONTENT_DIR = process.env.CONTENT_DIR || path.join(process.cwd(), "content");
+const CONTENT_DIR = process.env.APP_CONTENT_DIR || path.join(process.cwd(), "content");
 const CONTENT_ASSETS_DIR = path.join(CONTENT_DIR, "assets");
 
 export function createApp() {
@@ -56,6 +56,7 @@ export function createApp() {
 
   // Serve content repository assets without colliding with Vite's /assets/*.
   // (Vite puts JS/CSS in /assets; copying images there can blank the site.)
+  // @TODO is this necessary?
   app.use(
     "/content-assets",
     express.static(CONTENT_ASSETS_DIR, {

@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { type PostEntity } from "../../../shared/types";
+import { type PostEntity, type TagEntity } from "../../../shared/types";
 
 type PostResponse = PostEntity | null;
+
+type PostsResponseMeta = {
+  tag: TagEntity|null
+}
 
 type PostsResponse = {
   error?: string;
   posts: PostEntity[];
+  meta?: PostsResponseMeta
 }
 
 type UsePostsReturnHelpers = {
   loading: boolean;
   refetch: (tag?: string) => Promise<void>;
   fetchBySlug: (slug: string) => Promise<PostEntity | null>;
+  tag?: TagEntity|null
 }
 
 type UsePostsReturnType = [
@@ -22,6 +28,7 @@ type UsePostsReturnType = [
 export function usePosts(): UsePostsReturnType {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<PostEntity[]>([]);
+  const [tag, setTag] = useState<TagEntity|null>(null)
 
   const refetch = async (tag?: string) => {
     setLoading(true);
@@ -31,6 +38,9 @@ export function usePosts(): UsePostsReturnType {
     if (data?.error) {
       setLoading(false);
       throw new Error(data.error);
+    }
+    if (data?.meta?.tag) {
+      setTag({...data?.meta.tag})
     }
     setData([...data.posts]);
     setLoading(false);
@@ -61,6 +71,7 @@ export function usePosts(): UsePostsReturnType {
   return [ data, {
       loading,
       refetch,
-      fetchBySlug
+      fetchBySlug,
+      tag
   } ];
 }
