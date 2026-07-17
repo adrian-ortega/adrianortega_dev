@@ -9,6 +9,7 @@ import { PostTags } from "./PostTags";
 import { format } from "date-fns";
 import { Group } from "../Core/Group";
 import { IconCircleFilled } from "@tabler/icons-react";
+import { Loading } from "../Core/Loading";
 
 export function Post() {
   const navigate = useNavigate();
@@ -26,38 +27,41 @@ export function Post() {
   }, [slug]);
 
   return loading ? (
-    <Box className="Post-root">
+    <>
       <title>Loading... - Adrian Ortega</title>
-      <Container>
-        <h1>Loading...</h1>
-      </Container>
-    </Box>
+      <Loading />
+    </>
   ) : (
-    <Box className="Post-root">
-      <Container>
-        <Box className="Post-header">
-          <h1 className="Post-title">{post ? post.title : "Post Component"}</h1>
-          <Group alignItems="center">
-            <Box className="Post-published">
-              {format(post?.created_at as string, "PP pp")}
-            </Box>
-            <IconCircleFilled size={4} color="var(--colors-primary-7)" />
-            <PostTags post={post!} />
-          </Group>
-          {post?.cover_image && (
-            <Box className="Post-cover">
-              <img src={post.cover_image} alt={post.title} />
-              <Box
-                className="Post-coverBg"
-                style={{
-                  backgroundImage: `url(${post.cover_image})`,
-                }}
-              />
-            </Box>
-          )}
-        </Box>
-        <MarkdownContent content={post ? post.content : ""} />
-      </Container>
-    </Box>
+    <>
+      <title>{post ? post.title : "Post Component"} - Adrian Ortega</title>
+      <Box className="Post-root">
+        <Container>
+          <Box className="Post-header">
+            <h1 className="Post-title">
+              {post ? post.title : "Post Component"}
+            </h1>
+            <Group alignItems="center">
+              <Box className="Post-published">
+                {format(post?.created_at as string, "PP pp")}
+              </Box>
+              <IconCircleFilled size={4} color="var(--colors-primary-7)" />
+              <PostTags post={post!} />
+            </Group>
+            {post?.cover_image && (
+              <Box className="Post-cover">
+                <img src={post.cover_image} alt={post.title} />
+                <Box
+                  className="Post-coverBg"
+                  style={{
+                    backgroundImage: `url(${post.cover_image})`,
+                  }}
+                />
+              </Box>
+            )}
+          </Box>
+          <MarkdownContent content={post ? post.content : ""} />
+        </Container>
+      </Box>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { Flex, type FlexProps } from "./Flex";
 import { classNames } from "../../utils/components/attributes";
 
-type StackProps = FlexProps & {
+export type StackProps<C extends React.ElementType = "div"> = FlexProps<C> & {
   gap?: string | number;
 };
 
