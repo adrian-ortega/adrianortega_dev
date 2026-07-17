@@ -1,10 +1,5 @@
 import { useCallback, useSyncExternalStore } from "react";
 
-/**
- * Subscribes to a CSS media query and re-renders when it changes.
- * Mantine-like `useMediaQuery`, built on useSyncExternalStore so the
- * value is always consistent with the render (no stale-listener bugs).
- */
 export function useMediaQuery(query: string): boolean {
   const subscribe = useCallback(
     (onChange: () => void) => {
