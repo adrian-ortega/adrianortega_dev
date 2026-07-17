@@ -67,6 +67,18 @@ export const AppStateProvider = ({ children }: AppStateProviderProps) => {
       "#34382d",
       "#2a2d24",
     ],
+    blue: [
+      "#ecf4ff",
+      "#dce4f5",
+      "#b9c7e2",
+      "#94a8d0",
+      "#748dc0",
+      "#5f7cb7",
+      "#5474b4",
+      "#44639f",
+      "#3a5890",
+      "#2c4b80"
+    ],
     dark: [
       "#E3E8E8",
       "#C7D1D1",
@@ -78,6 +90,54 @@ export const AppStateProvider = ({ children }: AppStateProviderProps) => {
       "#2E3838",
       "#171C1C",
       "#101313",
+    ],
+    green: [
+      "#f2f8f4",
+      "#e4ede7",
+      "#c5dacc",
+      "#a2c7ae",
+      "#85b795",
+      "#73ac85",
+      "#68a87c",
+      "#57926a",
+      "#4b825d",
+      "#2d543a"
+    ],
+    orange: [
+      "#fff5e8",
+      "#f8e8d6",
+      "#f0d0ac",
+      "#e8b67e",
+      "#e1a057",
+      "#dd923e",
+      "#db8a30",
+      "#c27723",
+      "#ad691c",
+      "#975a11"
+    ],
+    pink: [
+      "#f8f1f8",
+      "#ece1eb",
+      "#d9bfd8",
+      "#c69bc5",
+      "#b67db4",
+      "#ac6aaa",
+      "#a860a6",
+      "#935091",
+      "#834681",
+      "#4f284e"
+    ],
+    red: [
+      "#faf1f0",
+      "#eddfde",
+      "#debbb8",
+      "#d09590",
+      "#c4756d",
+      "#bd6157",
+      "#bb564b",
+      "#a5473d",
+      "#933e35",
+      "#5c241f"
     ],
     yellow: [
       "#fffae1",
