@@ -15,7 +15,8 @@
     "express": "^5.2.1",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.1.0",
-    "markdown-it-prism": "^3.0.1"
+    "markdown-it-prism": "^3.0.1",
+    "mysql2": "^3.23.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

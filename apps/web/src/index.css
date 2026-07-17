@@ -37,7 +37,7 @@
   --bg-color: var(--colors-gray-0);
   --fg-color: var(--colors-dark-9);
   --fg-label-color: var(--colors-gray-7);
-
+  
   --container-max-width-desktop: 1100px;
   --container-max-width-widescreen: 1200px;
 
@@ -273,7 +273,6 @@ a {
 }
 
 .NotFound-root {
-
   & h1,
   & p {
     text-align: center;
@@ -463,7 +462,7 @@ a {
       --local-bg-hover-color: var(--colors-primary-6);
       --local-fg-hover-color: var(--colors-white);
       --local-bdr-hover-color: var(--colors-primary-7);
-
+      
       --local-bg-disabled-color: var(--colors-primary-6);
       --local-fg-disabled-color: var(--colors-primary-3);
       --local-bdr-disabled-color: var(--colors-primary-7);
@@ -589,7 +588,6 @@ a {
 
 .Contact-content,
 .Content-root {
-
   & h1,
   & h2,
   & h3,
@@ -714,7 +712,6 @@ a {
     transform: rotate(360deg);
   }
 }
-
 .Loading-root {
   display: flex;
   align-items: center;
@@ -728,5 +725,24 @@ a {
     border-top-color: var(--colors-primary-7);
     border-radius: 50%;
     animation: spin 1s linear infinite;
+  }
+}
+
+.ContactForm-status {
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  border-radius: 0.25em;
+  border: 1px solid;
+
+  &.is-success {
+    color: var(--colors-primary-9);
+    border-color: var(--colors-primary-7);
+    background: var(--colors-primary-1);
+  }
+
+  &.is-error {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    background: color-mix(in srgb, var(--danger-color) 8%, transparent);
   }
 }

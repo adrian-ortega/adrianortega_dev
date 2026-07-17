@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 
 import { RouteError } from "../components/Errors/RouteError";
 import { AboutPage } from "../components/Pages/AboutPage";
+import { ContactPage } from "../components/Pages/ContactPage";
 import { HomePage } from "../components/Pages/HomePage";
 import { PostsPage } from "../components/Pages/PostsPage";
 import { NotFound } from "../components/NotFound/NotFound";
@@ -23,7 +24,7 @@ export const createRouter = () =>
     },
     {
       path: paths.contact,
-      element: <div>Contact Page</div>,
+      element: <ContactPage />,
       errorElement: <RouteError />,
     }, {
       path: paths.posts,

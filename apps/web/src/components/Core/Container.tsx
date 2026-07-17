@@ -2,7 +2,7 @@ import { classNames } from "../../utils/components/attributes";
 import { Box, type BoxProps } from "./Box";
 
 type ContainerProps = BoxProps & {
-  maxWidth?: "xs" | "sm" | "md" | "lg" | "xl";
+  maxWidth?:"xs" | "sm" | "md" | "lg" | "xl";
 };
 
 export function Container({

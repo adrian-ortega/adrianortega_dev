@@ -21,6 +21,7 @@ const AppHeader = () => {
             <Group component="nav" className="Header-nav">
               <a href={to.about()}>About</a>
               <a href={to.posts()}>Posts</a>
+              <a href={to.contact()}>Contact</a>
             </Group>
             <ColorSchemeSwitcher />
           </Group>
