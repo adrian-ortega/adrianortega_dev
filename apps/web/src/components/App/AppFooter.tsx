@@ -20,7 +20,6 @@ const AppFooter = () => {
       <Container>
         <Group justifyContent="center">
           <Box>&copy; {year} Adrian Ortega | All rights reserved.</Box>
-          <Box>Title of thing</Box>
           <Box>
             <Group component="nav" gap={2}>
               {iconLinks.map(({ label, url, icon: Icon }) => (

@@ -288,8 +288,9 @@ a {
   }
 
   & .Post-title,
-  & > div {
+  &>div {
     place-self: center;
+
     @media screen and (min-width: 768px) {
       grid-column: 2 / span 10;
     }
@@ -659,7 +660,7 @@ a {
     }
   }
 
-  :not(pre) > code {
+  :not(pre)>code {
     font-size: 0.95em;
     background: var(--colors-gray-1);
     padding: 0.1em 0.3em;
@@ -687,7 +688,7 @@ a {
     list-style-type: disc;
   }
 
-  & > *:first-child {
+  &>*:first-child {
     margin-top: 0;
   }
 }

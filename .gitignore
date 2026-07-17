@@ -14,5 +14,5 @@ node_modules
 !.vscode/extensions.json
 
 .env
-./data/*
-./content/*
+/data/*
+/content/*

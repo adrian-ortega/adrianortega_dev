@@ -24,11 +24,11 @@ export function AboutPage() {
   }, []);
 
   return loading ? (
-      <>
-        <title>Loading... - Adrian Ortega</title>
-        <Loading />
-      </>
-    ) : (
+    <>
+      <title>Loading... - Adrian Ortega</title>
+      <Loading />
+    </>
+  ) : (
     <Box className="About-root">
       <title>About - Adrian Ortega</title>
       <Container>
