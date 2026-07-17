@@ -9,14 +9,16 @@ import {
   createAppThemeColors,
   lightDarkColor,
 } from "./useAppState";
+import useDisclosure from "./useDisclosure";
 
 interface AppStateProviderProps {
   children: ReactNode;
 }
 
 export const AppStateProvider = ({ children }: AppStateProviderProps) => {
-  const isOsDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+  // Theme and scheme
+  const isOsDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const savedColorScheme = window.localStorage?.getItem(
     "color-scheme"
   ) as AppStateColorScheme | null;
@@ -160,9 +162,16 @@ export const AppStateProvider = ({ children }: AppStateProviderProps) => {
   );
   const theme = useMemo<AppTheme>(() => ({ colors: themeColors }), [themeColors]);
 
+  // Mobile togles
+  const [mobileOpened, { open: openMobile, close: closeMobile, toggle: toggleMobile }] = useDisclosure();
+
   const api = useMemo<AppStateBaseContext>(
     () => ({
       colorScheme,
+      mobileOpened,
+      openMobile,
+      closeMobile,
+      toggleMobile,
       setColorScheme,
       setThemeColors,
       theme,
