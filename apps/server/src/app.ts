@@ -10,7 +10,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { getContentDir, getPublicDir } from "./utils/paths";
 
 const APP_ORIGIN = process.env.APP_ORIGIN ?? "http://localhost:5173";
-const CONTENT_DIR = process.env.CONTENT_DIR || path.join(process.cwd(), "content");
+const CONTENT_DIR = process.env.APP_CONTENT_DIR || path.join(process.cwd(), "content");
 const CONTENT_ASSETS_DIR = path.join(CONTENT_DIR, "assets");
 
 export function createApp() {
