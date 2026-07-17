@@ -10,8 +10,9 @@ services:
       - APP_DATA_DIR=/app/data
       - SENTRY_DSN=${SENTRY_DSN}
     volumes:
-      # Bind mount: place your markdown content on the host at this path
-      - /home/adrian/content/adrianortega.dev:/app/content
+      # Bind mount: markdown content lives on CASAORTEGA (\\CASAORTEGA\CasaShare\Apps),
+      # reached via the host's CIFS mount of //192.168.0.234/CasaShare at /mnt/casashare
+      - /mnt/casashare/Apps/content/adrianortega.dev:/app/content:ro
       # Named volume: persists the parsed-content JSON cache across restarts
       - data:/app/data
 
