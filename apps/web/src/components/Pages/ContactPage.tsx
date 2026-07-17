@@ -27,13 +27,15 @@ export function ContactPage() {
     <>
       <title>Contact - Adrian Ortega</title>
       <Box className="Contact-root">
-        <Container maxWidth="sm">
-          <MarkdownContent
-            className="Contact-content"
-            content={page ? page.content : "Loading..."}
-            style={{ flex: 1 }}
-          />
-          <ContactForm />
+        <Container>
+          <Container className="Contact-container" maxWidth="sm">
+            <MarkdownContent
+              className="Contact-content"
+              content={page ? page.content : "Loading..."}
+              style={{ flex: 1 }}
+            />
+            <ContactForm />
+          </Container>
         </Container>
       </Box>
     </>
