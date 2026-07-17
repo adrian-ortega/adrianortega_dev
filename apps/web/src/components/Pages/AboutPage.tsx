@@ -4,6 +4,7 @@ import { usePages } from "../../utils/usePages";
 import { useEffect, useState } from "react";
 import { type PageEntity } from "../../../../shared/types";
 import { MarkdownContent } from "../MarkdownContent/MarkdownContent";
+import { Container } from "../Core/Container";
 
 export function AboutPage() {
   const navigate = useNavigate();
@@ -24,7 +25,9 @@ export function AboutPage() {
   return (
     <Box className="About-root">
       <title>About - Adrian Ortega</title>
-      <MarkdownContent content={page ? page.content : "Loading..."} />
+      <Container>
+        <MarkdownContent content={page ? page.content : "Loading..."} />
+      </Container>
     </Box>
   );
 }
