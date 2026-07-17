@@ -9,11 +9,12 @@ import { to } from "../../routes/paths";
 
 type PostsProps = {
   tag?: string;
+  showDetails?: boolean
 }
 
-const Posts = ({ tag }: PostsProps) => {
+const Posts = ({ tag, showDetails }: PostsProps) => {
   const navigate = useNavigate();
-  const [posts, { loading, refetch }] = usePosts();
+  const [posts, { loading, refetch, tag: tagEntity }] = usePosts();
 
   useEffect(() => {
     refetch(tag as string).catch(() => {
@@ -23,6 +24,13 @@ const Posts = ({ tag }: PostsProps) => {
   }, [tag])
   return (
     <Box className="Posts-root">
+      <Container>
+        {showDetails && (
+          <Stack className="Posts-header" gap={64}>
+            <h1 className="Posts-title">Posts under <span>{tagEntity?.name}</span></h1>
+          </Stack>
+        )}
+      </Container>
       <Container>
         {loading ? (
           <Box>Loading...</Box>

@@ -31,40 +31,13 @@
   --colors-white: #ffffff;
   --colors-black: #000000;
 
-  --colors-primary-0: #f7f3f2;
-  --colors-primary-1: #e8e6e5;
-  --colors-primary-2: #d2c9c6;
-  --colors-primary-3: #bdaaa4;
-  --colors-primary-4: #ab9087;
-  --colors-primary-5: #a17f74;
-  --colors-primary-6: #9d766a;
-  --colors-primary-7: #896459;
-  --colors-primary-8: #7b594e;
-  --colors-primary-9: #5d4037;
-
-  --colors-gray-0: #f5f6f4;
-  --colors-gray-1: #e9e9e9;
-  --colors-gray-2: #d0d2cf;
-  --colors-gray-3: #b6b9b1;
-  --colors-gray-4: #a0a498;
-  --colors-gray-5: #919787;
-  --colors-gray-6: #777d6b;
-  --colors-gray-7: #696f5e;
-  --colors-gray-8: #34382d;
-  --colors-gray-9: #2a2d24;
-
   --primary: var(--colors-primary-7);
   --anchor-color: var(--colors-primary-9);
   --bg-color: var(--colors-gray-0);
-  --fg-color: var(--colors-gray-9);
+  --fg-color: var(--colors-dark-9);
   
   --container-max-width-desktop: 1100px;
   --container-max-width-widescreen: 1200px;
-}
-
-:root .dark-mode {
-  --bg-color: #121212;
-  --fg-color: #e0e0e0;
 }
 
 html,
@@ -169,6 +142,18 @@ a {
   padding: 3rem 0;
 }
 
+.Posts-title {
+  font-size: var(--font-size-h5);
+  font-family: var(--font-family-headings);
+  margin-bottom: 1.2em;
+  border-bottom: 1px solid var(--colors-gray-1);
+
+  & span {
+    font-weight: var(--font-weight-bold);
+    color: var(--colors-primary-8);
+  }
+}
+
 .PostTags-root {
   & a {
     text-decoration: none;
@@ -176,7 +161,7 @@ a {
     background: var(--colors-white);
     padding: 0.0125em 0.65em;
     border-radius: 300em;
-    border: 1px solid var(--colors-gray-1);
+    border: 1px solid var(--colors-dark-1);
 
     &:hover {
       background: var(--colors-primary-9);
@@ -186,20 +171,26 @@ a {
   }
 }
 
+.Posts-header {
+  margin-bottom: 1.3em;
+}
+
+.Posts-header,
 .PostPreviews-root {
   @media screen and (min-width: 768px) {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
   }
+}
 
-  & .PostPreview-root {
-    @media screen and (min-width: 768px) {
-      grid-column: 2 / span 10;
-    }
+.Posts-header h1,
+.PostPreviews-root .PostPreview-root {
+  @media screen and (min-width: 768px) {
+    grid-column: 2 / span 10;
+  }
 
-    @media screen and (min-width: 1024px) {
-      grid-column: 3 / span 8;
-    }
+  @media screen and (min-width: 1024px) {
+    grid-column: 3 / span 8;
   }
 }
 
@@ -212,7 +203,7 @@ a {
 
     & a {
       text-decoration: none;
-      color: var(--fg-color);
+      color: var(--colors-dark-7);
 
       &:hover {
         text-decoration: underline;
@@ -222,7 +213,7 @@ a {
 
   & .PostPreview-published {
     font-size: 0.875rem;
-    color: var(--colors-gray-6);
+    color: var(--colors-primary-8);
   }
 
   & .PostPreview-description {
@@ -230,7 +221,7 @@ a {
 
     &,
     & p {
-      color: var(--colors-gray-7);
+      color: var(--colors-dark-6);
     }
   }
 }
@@ -248,7 +239,7 @@ a {
   border-radius: 3000rem;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: var(--colors-gray-1);
   }
 
   & span {
@@ -265,10 +256,6 @@ a {
 .NotFound-root,
 .Post-root {
   padding: 3em 0;
-}
-
-.Post-root {
-  /* Add post styles here */
 }
 
 .Post-header {
@@ -361,10 +348,10 @@ a {
   & h4,
   & h5,
   & h6,
-  p,
-  ul,
-  ol,
-  div {
+  & p,
+  & ul,
+  & ol,
+  & div {
     @media screen and (min-width: 768px) {
       grid-column: 2 / span 10;
     }
@@ -389,6 +376,7 @@ a {
   & h3,
   & h4 {
     font-family: var(--font-family-headings);
+    color: var(--colors-dark-6)
   }
 
   & h1,

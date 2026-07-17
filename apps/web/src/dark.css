@@ -1,0 +1,67 @@
+.dark-mode {
+  --bg-color: var(--colors-dark-8);
+  --fg-color: var(--colors-gray-5);
+  --anchor-color: var(--colors-primary-5);
+}
+
+.dark-mode .ColorSchemeSwitcher-button {
+  &:hover {
+    background-color: var(--colors-dark-7);
+  }
+}
+
+.dark-mode .PostPreview-root {
+  & .PostPreview-title {
+    & a {
+      color: var(--colors-gray-5);
+
+      &:hover {
+        color: var(--colors-primary-5);
+      }
+    } 
+  }
+}
+
+.dark-mode .PostTags-root a {
+  background: var(--colors-primary-9);
+  border-color: var(--colors-primary-8);
+  color: var(--colors-primary-6);
+
+  &:hover {
+    background: var(--colors-primary-7);
+    border-color: var(--colors-primary-7);
+    color: var(--colors-primary-2);
+  }
+}
+
+.dark-mode .Post-title {
+  color: var(--colors-dark-1)
+}
+
+.dark-mode .Posts-title {
+  color: var(--colors-dark-5);
+  border-bottom-color: var(--colors-dark-7);
+
+  & span {
+    color: var(--colors-primary-6);
+  }
+}
+
+.dark-mode .Content-root {
+  & h1,
+  & h2 {
+    color: var(--colors-primary-2)
+  }
+
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    color: var(--colors-primary-5)
+  }
+
+  :not(pre) > code {
+    background: var(--colors-primary-8);
+    color: var(--colors-primary-2);
+  }
+}

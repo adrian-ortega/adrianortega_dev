@@ -3,5 +3,5 @@ import Posts from "../Posts";
 
 export function PostsPage() {
   const { tag } = useParams<{ tag?: string }>();
-  return <Posts tag={tag} />;
+  return <Posts tag={tag} showDetails />;
 }

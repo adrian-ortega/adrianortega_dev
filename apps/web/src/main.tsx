@@ -4,6 +4,7 @@ import * as Sentry from "@sentry/react";
 import "./reset.css";
 import "./prism.css";
 import "./index.css";
+import "./dark.css";
 
 import App from "./App.tsx";
 import { AppStateProvider } from "./utils/AppStateProvider.tsx";
