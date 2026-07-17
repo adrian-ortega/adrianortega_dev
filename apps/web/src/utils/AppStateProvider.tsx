@@ -152,13 +152,19 @@ export const AppStateProvider = ({ children }: AppStateProviderProps) => {
       "#a28000",
     ],
   }));
-  const setThemeColors = (colors: AppThemeColors) => _setThemeColors(createAppThemeColors(colors))
+  const setThemeColors = useCallback(
+    (colors: AppThemeColors) => {
+      _setThemeColors(createAppThemeColors(colors))
+    },
+    []
+  );
   const theme = useMemo<AppTheme>(() => ({ colors: themeColors }), [themeColors]);
 
   const api = useMemo<AppStateBaseContext>(
     () => ({
       colorScheme,
       setColorScheme,
+      setThemeColors,
       theme,
     }),
     [colorScheme, setColorScheme, theme]
