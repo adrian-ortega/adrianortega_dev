@@ -6,7 +6,9 @@ import { usePosts } from "../../utils/usePosts";
 import { MarkdownContent } from "../MarkdownContent/MarkdownContent";
 import { to } from "../../routes/paths";
 import { PostTags } from "./PostTags";
+import { PostNav } from "./PostNav";
 import { RelatedPosts } from "./RelatedPosts";
+import type { PostDetail } from "../../../../shared/types";
 import { format } from "date-fns";
 import { Group } from "../Core/Group";
 import { IconCircleFilled } from "@tabler/icons-react";
@@ -74,6 +76,7 @@ export function Post() {
             )}
           </Box>
           <MarkdownContent content={post ? post.content : ""} />
+          <PostNav navigation={(post as PostDetail | undefined)?.navigation} />
           <RelatedPosts slug={slug} />
         </Container>
       </Box>

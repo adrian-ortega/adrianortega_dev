@@ -815,10 +815,51 @@ a {
   }
 }
 
+.PostNav-root {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin-top: 4em;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & .PostNav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    text-decoration: none;
+
+    &.PostNav-next {
+      @media screen and (min-width: 768px) {
+        text-align: right;
+        align-items: flex-end;
+      }
+    }
+
+    & .PostNav-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375em;
+      font-size: 0.875rem;
+      color: var(--colors-primary-8);
+    }
+
+    & .PostNav-linkTitle {
+      font-weight: var(--font-weight-headings-semibold);
+      font-family: var(--font-family-headings);
+      color: var(--colors-dark-7);
+    }
+
+    &:hover .PostNav-linkTitle {
+      text-decoration: underline;
+    }
+  }
+}
+
 .RelatedPosts-root {
   margin-top: 4em;
-  padding-top: 2em;
-  border-top: 1px solid color-mix(in srgb, var(--fg-color) 12%, transparent);
 
   & .RelatedPosts-title {
     font-size: var(--font-size-h5);
@@ -830,7 +871,7 @@ a {
   & .RelatedPosts-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5em;
+    gap: 2em;
 
     @media screen and (min-width: 768px) {
       grid-template-columns: repeat(3, 1fr);
@@ -840,19 +881,16 @@ a {
   & .RelatedPosts-card {
     display: flex;
     flex-direction: column;
-    padding: 1.25em;
-    border: 1px solid color-mix(in srgb, var(--fg-color) 12%, transparent);
-    border-radius: 0.5em;
 
     & .RelatedPosts-cardTitle {
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: var(--font-weight-headings-semibold);
       font-family: var(--font-family-headings);
-      margin: 0 0 0.25em 0;
+      margin: 0 0 0.5em 0;
 
       & a {
         text-decoration: none;
-        color: var(--fg-color);
+        color: var(--colors-dark-7);
 
         &:hover {
           text-decoration: underline;
@@ -861,18 +899,21 @@ a {
     }
 
     & .RelatedPosts-published {
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       color: var(--colors-primary-8);
     }
 
     & .RelatedPosts-description {
-      margin: 0.75em 0 1em 0;
-      font-size: 0.875rem;
-      color: var(--fg-label-color);
+      margin: 1em 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+
+      &,
+      & p {
+        color: var(--colors-dark-6);
+      }
     }
 
     & .RelatedPosts-tags {
