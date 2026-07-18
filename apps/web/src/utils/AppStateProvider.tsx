@@ -176,7 +176,16 @@ export const AppStateProvider = ({ children }: AppStateProviderProps) => {
       setThemeColors,
       theme,
     }),
-    [colorScheme, setColorScheme, theme]
+    [
+      colorScheme,
+      setColorScheme,
+      setThemeColors,
+      theme,
+      mobileOpened,
+      openMobile,
+      closeMobile,
+      toggleMobile,
+    ]
   );
 
   window.document.body.classList.add(`${colorScheme}-mode`);

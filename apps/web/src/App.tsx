@@ -3,6 +3,7 @@ import { Stack } from "./components/Core/Stack";
 import { createRouter } from "./routes";
 import AppHeader from "./components/App/AppHeader";
 import AppFooter from "./components/App/AppFooter";
+import AppMobileMenu from "./components/App/AppMobileMenu";
 
 function App() {
   const router = createRouter();
@@ -11,7 +12,8 @@ function App() {
       <title>Adrian Ortega - Software Engineer</title>
       <AppHeader/>
       <RouterProvider router={router} />
-      <AppFooter/>
+      <AppFooter />
+      <AppMobileMenu />
     </Stack>
   );
 }

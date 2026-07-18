@@ -10,12 +10,19 @@ import { format } from "date-fns";
 import { Group } from "../Core/Group";
 import { IconCircleFilled } from "@tabler/icons-react";
 import { Loading } from "../Core/Loading";
+import { useAppMediaQueries } from "../../utils/useMediaQuery";
+import { Stack } from "../Core/Stack";
 
 export function Post() {
   const navigate = useNavigate();
   const { slug } = useParams();
+  const { isMobile } = useAppMediaQueries();
   const [posts, { loading, fetchBySlug }] = usePosts();
   const post = useMemo(() => posts.find((p) => p.slug === slug), [posts, slug]);
+
+  const publishedAt = loading ? null : <Box className="Post-published">
+    {format(post?.created_at as string, "PP pp")}
+  </Box>
 
   useEffect(() => {
     if (slug) {
@@ -34,19 +41,25 @@ export function Post() {
   ) : (
     <>
       <title>{post ? post.title : "Post Component"} - Adrian Ortega</title>
-      <Box className="Post-root">
+      <Box component="article" className="Post-root">
         <Container>
-          <Box className="Post-header">
+          <Box component="header" className="Post-header">
             <h1 className="Post-title">
               {post ? post.title : "Post Component"}
             </h1>
-            <Group alignItems="center">
-              <Box className="Post-published">
-                {format(post?.created_at as string, "PP pp")}
-              </Box>
-              <IconCircleFilled size={4} color="var(--colors-primary-7)" />
-              <PostTags post={post!} />
-            </Group>
+            {isMobile ? (
+              <Stack alignItems="center">
+                {publishedAt}
+                <PostTags post={post!} />
+              </Stack>
+            ) : (
+
+              <Group alignItems="center">
+                {publishedAt}
+                <IconCircleFilled size={4} color="var(--colors-primary-7)" />
+                <PostTags post={post!} />
+              </Group>
+            )}
             {post?.cover_image && (
               <Box className="Post-cover">
                 <img src={post.cover_image} alt={post.title} />

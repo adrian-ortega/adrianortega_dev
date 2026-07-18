@@ -4,6 +4,11 @@
   --anchor-color: var(--colors-primary-5);
 }
 
+.dark-mode .MobileMenu-close.Button-root,
+.dark-mode .Mobile-trigger.Button-root {
+  --local-fg-color: var(--colors-primary-5);
+}
+
 .dark-mode .ColorSchemeSwitcher-button {
   &:hover {
     background-color: var(--colors-dark-7);
