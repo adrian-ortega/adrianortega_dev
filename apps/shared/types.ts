@@ -63,9 +63,34 @@ export type PostEntity = MdEntity & HasHTMLMetaData & {
   created_at?: string;
   published_at?: string;
   updated_at?: string;
-  
+
   thumbnail?: string;
   cover_image?: string;
 
   tags: string[]; // Array of TagEntity slugs
+};
+
+// Minimal post reference for next/prev navigation.
+// Posts have no separate id — the slug is the unique identifier.
+export type PostNavLink = {
+  slug: string;
+  title: string;
+};
+
+export type PostNavigation = {
+  prev: PostNavLink | null; // older post (further down the timeline)
+  next: PostNavLink | null; // newer post
+};
+
+// Shape returned by GET /api/posts/:slug — the post plus its neighbors
+export type PostDetail = PostEntity & {
+  navigation: PostNavigation;
+};
+
+// Card-sized post summary returned by GET /api/posts/:slug/related
+export type RelatedPost = PostNavLink & {
+  description: string;
+  thumbnail?: string;
+  tags: string[];
+  created_at?: string;
 };
