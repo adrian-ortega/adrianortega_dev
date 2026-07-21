@@ -739,6 +739,7 @@ a {
 
   & pre:not([class*="language-"]) {
     color: var(--colors-dark-6, #ccc);
+    background: var(--colors-gray-1, #2d2d2d);
     padding: 1.25em;
     margin: 1.5em 0 0.8em;
     overflow: auto;

@@ -23,13 +23,18 @@ export function Post() {
   const [posts, { loading, fetchBySlug }] = usePosts();
   const post = useMemo(() => posts.find((p) => p.slug === slug), [posts, slug]);
 
-  const publishedAt = loading ? null : <Box className="Post-published">
+  const publishedAt = !loading && post ? <Box className="Post-published">
     {format(post?.created_at as string, "PP pp")}
-  </Box>
+  </Box> : null;
+
+  const postTags = !loading && post ? <PostTags post={post} /> : null;
 
   useEffect(() => {
+    console.log('slug from useEffect', slug, 'post', post)
     if (slug) {
+      console.log('fetching post by slug', slug, 'post', post)
       fetchBySlug(slug as string).catch(() => {
+        console.log('post not found, navigating to notFound', 'post', post)
         navigate(to.notFound());
       });
     }
@@ -53,14 +58,14 @@ export function Post() {
             {isMobile ? (
               <Stack alignItems="center">
                 {publishedAt}
-                <PostTags post={post!} />
+                {postTags}
               </Stack>
             ) : (
 
               <Group alignItems="center">
                 {publishedAt}
                 <IconCircleFilled size={4} color="var(--colors-primary-7)" />
-                <PostTags post={post!} />
+                {postTags}
               </Group>
             )}
             {post?.cover_image && (
