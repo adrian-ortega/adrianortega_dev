@@ -15,7 +15,7 @@ export type AppStateBaseContext = {
   colorScheme: AppStateColorScheme;
   setColorScheme: (scheme: AppStateColorScheme) => void;
   setThemeColors: (colors: AppThemeColors) => void;
-  mobileOpened: Boolean;
+  mobileOpened: boolean;
   openMobile: () => void;
   closeMobile: () => void;
   toggleMobile: () => void;
