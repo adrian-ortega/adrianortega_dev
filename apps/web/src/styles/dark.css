@@ -15,14 +15,13 @@
   }
 }
 
-.dark-mode .PostPreview-root {
-  & .PostPreview-title {
-    & a {
-      color: var(--colors-gray-5);
+.dark-mode .RelatedPosts-root .RelatedPosts-card .RelatedPosts-cardTitle,
+.dark-mode .PostPreview-root .PostPreview-title {
+  & a {
+    color: var(--colors-gray-4);
 
-      &:hover {
-        color: var(--colors-primary-5);
-      }
+    &:hover {
+      color: var(--colors-primary-5);
     }
   }
 }
@@ -43,12 +42,26 @@
   color: var(--colors-dark-1)
 }
 
+.dark-mode .RelatedPosts-root .RelatedPosts-title,
 .dark-mode .Posts-title {
   color: var(--colors-dark-5);
   border-bottom-color: var(--colors-dark-7);
 
   & span {
     color: var(--colors-primary-6);
+  }
+}
+
+.dark-mode .PostNav-root {
+  border-top-color: var(--colors-dark-7);
+}
+
+.dark-mode .PostNav-root .PostNav-link  {
+  & .PostNav-label {
+    color: var(--colors-dark-3);
+  }
+  & .PostNav-linkTitle {
+    color: var(--colors-primary-3);
   }
 }
 
@@ -67,8 +80,13 @@
   }
 
   :not(pre)>code {
-    background: var(--colors-primary-8);
-    color: var(--colors-primary-2);
+    background: var(--colors-dark-9);
+    color: var(--colors-dark-3);
+  }
+
+  & pre:not([class*="language-"]) {
+    color: var(--colors-gray-3, #ccc);
+    background: var(--colors-dark-9, #2d2d2d);
   }
 }
 
@@ -144,5 +162,14 @@
 
   & & .token.inserted {
     color: var(--colors-green-4, green);
+  }
+}
+
+.dark-mode .InputBase-root {
+
+  & input,
+  & textarea {
+    border-color: var(--colors-dark-6);
+    background-color: var(--colors-dark-7);
   }
 }

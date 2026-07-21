@@ -568,6 +568,7 @@ a {
   & textarea {
     appearance: none;
     border: 1px solid var(--colors-gray-2);
+    background-color: var(--colors-gray-0);
     min-height: 3em;
     padding: 0.5em;
     border-radius: 0.25em;
@@ -667,8 +668,9 @@ a {
   & h1,
   & h2 {
     font-size: var(--font-size-h2);
-    margin-top: 0.8em;
-    margin-bottom: 1.25em;
+    line-height: 1.1em;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
 
     &.subheader {
       font-size: 1.5em;
@@ -733,6 +735,14 @@ a {
     background: var(--colors-gray-1);
     padding: 0.1em 0.3em;
     border-radius: 4px;
+  }
+
+  & pre:not([class*="language-"]) {
+    color: var(--colors-dark-6, #ccc);
+    padding: 1.25em;
+    margin: 1.5em 0 0.8em;
+    overflow: auto;
+    border-radius: .25em;
   }
 
   & ul,
@@ -820,6 +830,9 @@ a {
   grid-template-columns: 1fr;
   gap: 1em;
   margin-top: 4em;
+
+  border-top: 2px solid var(--colors-gray-2);
+  padding-top: var(--spacing-xl);
 
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
