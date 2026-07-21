@@ -14,7 +14,7 @@ export type PolymorphicRef<C extends ElementType> =
 
 export type BoxOwnProps = {
   children?: React.ReactNode;
-  className?: string | (string | undefined)[];
+  className?: string;
   style?: React.CSSProperties;
 };
 
@@ -28,7 +28,7 @@ const BoxInner = <C extends ElementType = "div">(
   ref: React.Ref<C>
 ) => {
   const Component = (component ?? "div") as ElementType;
-  const _className = classNames(className);
+  const _className = classNames(className?.split(" ") ?? []);
 
   return (
     <Component ref={ref} className={_className} {...rest}>

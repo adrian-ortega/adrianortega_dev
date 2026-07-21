@@ -8,6 +8,15 @@ import {
 import { readTagFile } from "../services/tagsService";
 import { type PostDetail, type TagEntity } from "../../../shared/types";
 
+const getTagBySlug = async (slug: string): Promise<TagEntity | null> => {
+  try {
+    const tag = await readTagFile(slug);
+    return tag;
+  } catch (e) {
+    return null;
+  }
+}
+
 export async function listPosts(_req: Request, res: Response, next: NextFunction) {
   try {
     const tag = String(_req.query.tag || "").trim() || undefined;
@@ -20,7 +29,7 @@ export async function listPosts(_req: Request, res: Response, next: NextFunction
     const meta: { tag?: TagEntity | null } = { tag: null };
 
     if (tag) {
-      meta.tag = await readTagFile(tag as string)
+      meta.tag = await getTagBySlug(tag as string)
     }
 
     return res.json({ posts, meta, error });

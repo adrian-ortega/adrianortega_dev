@@ -30,7 +30,7 @@ const Posts = ({ tag, showDetails }: PostsProps) => {
         <Container>
           {showDetails && (
             <Stack className="Posts-header" gap={64}>
-              <h1 className="Posts-title">Posts under <span>{tagEntity?.name}</span></h1>
+              <h1 className="Posts-title">Posts under <span>{ tagEntity ? tagEntity?.name : tag }</span></h1>
             </Stack>
           )}
         </Container>
