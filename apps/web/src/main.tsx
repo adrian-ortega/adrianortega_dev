@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import * as Sentry from "@sentry/react";
-import "./reset.css";
-import "./prism.css";
-import "./index.css";
-import "./dark.css";
+import "./styles/reset.css";
+import "./styles/prism.css";
+import "./styles/index.css";
+import "./styles/dark.css";
 
 import App from "./App.tsx";
 import { AppStateProvider } from "./utils/AppStateProvider.tsx";

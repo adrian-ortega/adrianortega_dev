@@ -12,10 +12,14 @@ export type AppTheme = {
 }
 
 export type AppStateBaseContext = {
-  theme: AppTheme;
   colorScheme: AppStateColorScheme;
   setColorScheme: (scheme: AppStateColorScheme) => void;
   setThemeColors: (colors: AppThemeColors) => void;
+  mobileOpened: Boolean;
+  openMobile: () => void;
+  closeMobile: () => void;
+  toggleMobile: () => void;
+  theme: AppTheme;
 }
 
 export const AppStateContext = createContext<AppStateBaseContext>(
