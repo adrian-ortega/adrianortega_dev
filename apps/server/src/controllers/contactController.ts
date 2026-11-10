@@ -6,6 +6,7 @@ import {
   isContactDbConfigured,
   saveContactSubmission,
 } from "../services/contactService";
+import { sendContactNotification } from "../services/contactNotifyService";
 
 // Mirrors the parked_site contact flow:
 // nonce check -> rate limit -> validate -> enrich -> insert.
@@ -67,7 +68,7 @@ export async function submitContact(
       return fail(400, "Message is too long.");
     }
 
-    await saveContactSubmission({
+    const submission = {
       firstName,
       lastName,
       email,
@@ -75,7 +76,11 @@ export async function submitContact(
       ip: req.ip ?? null,
       userAgent: req.get("user-agent") ?? null,
       referrer: req.get("referer") ?? null,
-    });
+    };
+    await saveContactSubmission(submission);
+
+    // Best-effort email to Adrian; never blocks or fails the response.
+    void sendContactNotification(submission);
 
     return res.json({
       error: false,
