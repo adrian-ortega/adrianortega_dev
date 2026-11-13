@@ -16,6 +16,10 @@ services:
       - DB_USER=${DB_USER:-aodev}
       - DB_PASSWORD=${DB_PASSWORD}
       - CONTACT_NONCE_SECRET=${CONTACT_NONCE_SECRET}
+      # Contact form email notification via Resend (optional; no-op if unset)
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CONTACT_NOTIFY_TO=${CONTACT_NOTIFY_TO}
+      - CONTACT_NOTIFY_FROM=${CONTACT_NOTIFY_FROM}
     volumes:
       # Bind mount: markdown content lives on CASAORTEGA (\\CASAORTEGA\CasaShare\Apps),
       # reached via the host's CIFS mount of //192.168.0.234/CasaShare at /mnt/casashare
